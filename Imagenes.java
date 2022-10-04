@@ -76,7 +76,7 @@ public class Imagenes extends JLabel implements Runnable {
 	         btn1.setEnabled(true);
             btn2.setEnabled(false);
             btn3.setEnabled(false);
-            btn2.setText("Pausar");
+            btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
             nombreIngrediente.setText("Taco completo. Fin del pedido");
          } else {
             if (j < ingredientes.length - 1) {
