@@ -46,6 +46,7 @@ public class Simulacion extends JFrame {
         Texto txt7 = new Texto();
         Texto txt8 = new Texto();
         Texto txt9 = new Texto();
+	
         ingrediente.nombreIngrediente = nombreIngrediente;
         ingrediente.tm1 = tm1;
         ingrediente.img1 = tortilla;
@@ -58,6 +59,10 @@ public class Simulacion extends JFrame {
         Botoncito btn2 = new Botoncito("Pausar");
         // Botoncito btn3 = new Botoncito("Reanudar");
         Botoncito btn4 = new Botoncito("Parar");
+
+        ingrediente.btn1=btn1;
+        ingrediente.btn2=btn2;
+        ingrediente.btn3=btn4;
 
         KeyAdapter ka = new KeyAdapter() {
             public void keyTyped(KeyEvent e) {

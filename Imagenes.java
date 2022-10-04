@@ -2,6 +2,7 @@ import javax.swing.*;
 
 public class Imagenes extends JLabel implements Runnable {
    Imagenes img1;
+   Botoncito btn1,btn2,btn3;
    Etiquetas nombreIngrediente;
    Texto txt1;
    Timer tm1;
@@ -29,16 +30,14 @@ public class Imagenes extends JLabel implements Runnable {
          nombreIngrediente.setText("Agregando " + ingredientes[j]);
          nombreIngrediente.setHorizontalAlignment(SwingConstants.CENTER);
          random = getRandom(1, 3);
-         for (int i = 290; i <= 350; i++) {
+         for (int i = 300; i <= 350; i++) {
             try {
                synchronized (this) {
                   while (pausar) {
                      wait();
                   }
                   if (parar == true) {
-                     // parar = false;
                      break out;
-
                   }
                }
                time = (tiempoImagenes[j] * 1000) / 61;
@@ -73,11 +72,17 @@ public class Imagenes extends JLabel implements Runnable {
          posXopt3 = 500;
          if (pedidosListos == Integer.parseInt(txt1.getText().toString())) {
             tm1.stopHilo();
+	    btn1.setEnabled(true);
+            btn2.setEnabled(false);
+            btn3.setEnabled(false);
+            btn2.setText("Pausar");
+            nombreIngrediente.setText("Taco completo");
          } else {
             if (j < ingredientes.length - 1) {
                j++;
             } else if (j == ingredientes.length - 1) {
                try {
+                  nombreIngrediente.setText("Taco completo");
                   Thread.sleep(4000);
                   img1.setIcon(new ImageIcon(this.getClass().getResource(url[0])));
                } catch (Exception e) {
