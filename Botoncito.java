@@ -5,6 +5,7 @@ public class Botoncito extends JButton implements ActionListener {
   Imagenes img1;
   Texto txt1;
   Timer tm1;
+  Etiquetas pedidos;
   Botoncito btn1, btn2, btn4;
 
   public Botoncito(String name) {
@@ -17,6 +18,7 @@ public class Botoncito extends JButton implements ActionListener {
 
     if (e.getActionCommand() == "Iniciar") {
       tm1.setText("00:00:00");
+      pedidos.setText("0");
       Thread t1 = new Thread(img1);
       Thread t2 = new Thread(tm1);
       if (txt1.getText().toString().equals("")) {

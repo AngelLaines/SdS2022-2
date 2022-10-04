@@ -24,6 +24,17 @@ public class Simulacion extends JFrame {
         Etiquetas et9 = new Etiquetas("Cantidad de pedidos:");
         Etiquetas et10 = new Etiquetas("Tiempo transcurrido:");
 
+        Etiquetas et11 = new Etiquetas("pz.");
+        Etiquetas et12 = new Etiquetas("g.");
+        Etiquetas et13 = new Etiquetas("g.");
+        Etiquetas et14 = new Etiquetas("g.");
+        Etiquetas et15 = new Etiquetas("g.");
+        Etiquetas et16 = new Etiquetas("g.");
+        Etiquetas et17 = new Etiquetas("ml.");
+        Etiquetas et18 = new Etiquetas("g.");
+        Etiquetas et19 = new Etiquetas("Pedidos Hechos: ");
+        Etiquetas et20 = new Etiquetas("0");
+
         Etiquetas nombreIngrediente = new Etiquetas();
 
         Timer tm1 = new Timer("00:00:00");
@@ -46,7 +57,8 @@ public class Simulacion extends JFrame {
         Texto txt7 = new Texto();
         Texto txt8 = new Texto();
         Texto txt9 = new Texto();
-	
+
+        ingrediente.pedidosCompletados = et20;
         ingrediente.nombreIngrediente = nombreIngrediente;
         ingrediente.tm1 = tm1;
         ingrediente.img1 = tortilla;
@@ -60,9 +72,9 @@ public class Simulacion extends JFrame {
         // Botoncito btn3 = new Botoncito("Reanudar");
         Botoncito btn4 = new Botoncito("Parar");
 
-        ingrediente.btn1=btn1;
-        ingrediente.btn2=btn2;
-        ingrediente.btn3=btn4;
+        ingrediente.btn1 = btn1;
+        ingrediente.btn2 = btn2;
+        ingrediente.btn3 = btn4;
 
         KeyAdapter ka = new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -93,6 +105,7 @@ public class Simulacion extends JFrame {
         // btn3.img1 = ingrediente;
         btn4.img1 = ingrediente;
 
+        btn1.pedidos = et20;
         btn1.tm1 = tm1;
         btn2.tm1 = tm1;
         // btn3.img1 = ingrediente;
@@ -117,21 +130,32 @@ public class Simulacion extends JFrame {
         et7.setBounds(10, 170, 100, 25);
         et8.setBounds(10, 190, 100, 25);
         titulo.setBounds(90, 10, 500, 18);
-        tortilla.setBounds(300, 50, 256, 256);
-        nombreIngrediente.setBounds(330,320,200,25);
+        tortilla.setBounds(340, 50, 256, 256);
+        nombreIngrediente.setBounds(370, 320, 200, 25);
         et9.setBounds(10, 30, 120, 25);
         et10.setBounds(10, 320, 120, 25);
         tm1.setBounds(140, 320, 100, 25);
 
-        txt1.setBounds(130, 50, 100, 20);
-        txt2.setBounds(130, 70, 100, 20);
-        txt3.setBounds(130, 90, 100, 20);
-        txt4.setBounds(130, 110, 100, 20);
-        txt5.setBounds(130, 130, 100, 20);
-        txt6.setBounds(130, 150, 100, 20);
-        txt7.setBounds(130, 170, 100, 20);
-        txt8.setBounds(130, 190, 100, 20);
-        txt9.setBounds(130, 30, 100, 20);
+        txt1.setBounds(130, 52, 50, 20);
+        txt2.setBounds(130, 72, 50, 20);
+        txt3.setBounds(130, 92, 50, 20);
+        txt4.setBounds(130, 112, 50, 20);
+        txt5.setBounds(130, 132, 50, 20);
+        txt6.setBounds(130, 152, 50, 20);
+        txt7.setBounds(130, 172, 50, 20);
+        txt8.setBounds(130, 192, 50, 20);
+        txt9.setBounds(130, 32, 50, 20);
+
+        et11.setBounds(185, 50, 100, 20);
+        et12.setBounds(185, 70, 100, 20);
+        et13.setBounds(185, 90, 100, 20);
+        et14.setBounds(185, 110, 100, 20);
+        et15.setBounds(185, 130, 100, 20);
+        et16.setBounds(185, 150, 100, 20);
+        et17.setBounds(185, 170, 100, 20);
+        et18.setBounds(185, 190, 100, 20);
+        et19.setBounds(10, 340, 120, 25);
+        et20.setBounds(120, 340, 50, 25);
 
         btn1.setBounds(10, 230, 90, 20);
         btn2.setBounds(10, 260, 90, 20);
@@ -152,6 +176,19 @@ public class Simulacion extends JFrame {
         add(et7);
         add(et8);
         add(et9);
+
+        add(et11);
+        add(et12);
+        add(et13);
+        add(et14);
+        add(et15);
+        add(et16);
+        add(et17);
+        add(et18);
+
+        add(et19);
+        add(et20);
+
         add(titulo);
         add(et10);
         add(tm1);
@@ -175,7 +212,7 @@ public class Simulacion extends JFrame {
         add(btn4);
 
         setTitle("Simulador de Tacos de Carne Asada");
-        setSize(700, 400);
+        setSize(700, 430);
         setResizable(false);
         setLayout(null);
         setLocationRelativeTo(null);
