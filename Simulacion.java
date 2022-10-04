@@ -39,6 +39,7 @@ public class Simulacion extends JFrame {
 
         Timer tm1 = new Timer("00:00:00");
 
+        String[] urlBtn = {"images/play.png","images/pause.png","images/play.png","images/stop.png"};
         String[] ingredientes = { "carne", "repollo", "verdura", "limon", "salsa", "cebolla", "pepino" };
         String[] imagenes = { "images/meatR.png", "images/cabbageR.png", "images/vegetableR.png", "images/lemonR.png",
                 "images/molcajeteR.png",
@@ -67,10 +68,10 @@ public class Simulacion extends JFrame {
         ingrediente.imagenes = imagenes;
         ingrediente.tiempoImagenes = tiempoIngrediente;
 
-        Botoncito btn1 = new Botoncito("Iniciar");
-        Botoncito btn2 = new Botoncito("Pausar");
+        Botoncito btn1 = new Botoncito("images/power.png","Iniciar");
+        Botoncito btn2 = new Botoncito("images/pause.png","Pausar");
         // Botoncito btn3 = new Botoncito("Reanudar");
-        Botoncito btn4 = new Botoncito("Parar");
+        Botoncito btn4 = new Botoncito("images/stop.png","Parar");
 
         ingrediente.btn1 = btn1;
         ingrediente.btn2 = btn2;
@@ -111,12 +112,15 @@ public class Simulacion extends JFrame {
         // btn3.img1 = ingrediente;
         btn4.tm1 = tm1;
 
+        btn1.btn1=btn1;
         btn1.btn2 = btn2;
         btn1.btn4 = btn4;
 
         btn2.btn1 = btn1;
+        btn2.btn2 = btn2;
         btn2.btn4 = btn4;
 
+        btn4.btn4 = btn4;
         btn4.btn2 = btn2;
         btn4.btn1 = btn1;
         // Posicion
@@ -157,10 +161,10 @@ public class Simulacion extends JFrame {
         et19.setBounds(10, 340, 120, 25);
         et20.setBounds(120, 340, 50, 25);
 
-        btn1.setBounds(10, 230, 90, 20);
-        btn2.setBounds(10, 260, 90, 20);
+        btn1.setBounds(10, 230, 32, 32);
+        btn2.setBounds(45, 230,32,32);
         // btn3.setBounds(10,290,90,20);
-        btn4.setBounds(10, 290, 90, 20);
+        btn4.setBounds(80, 230,32,32);
         // Acciones
         btn1.addActionListener(btn1);
         btn2.addActionListener(btn2);
