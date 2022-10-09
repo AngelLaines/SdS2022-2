@@ -3,6 +3,8 @@ import java.awt.event.*;
 import java.awt.*;
 
 public class Simulacion extends JFrame {
+    private int n = 0;
+
     public Simulacion() {
         initValues();
     }
@@ -34,17 +36,17 @@ public class Simulacion extends JFrame {
         Etiquetas et18 = new Etiquetas("g.");
         Etiquetas et19 = new Etiquetas("Pedidos Hechos: ");
         Etiquetas et20 = new Etiquetas("0");
+        Etiquetas et21 = new Etiquetas("Tiempos");
 
         Etiquetas nombreIngrediente = new Etiquetas();
 
         Timer tm1 = new Timer("00:00:00");
 
-        String[] urlBtn = {"images/play.png","images/pause.png","images/play.png","images/stop.png"};
-        String[] ingredientes = { "carne", "repollo", "verdura", "limon", "salsa", "cebolla", "pepino" };
+        String[] ingredientes = { "carne", "repollo", "verdura", "limon", "pepino", "salsa", "cebolla" };
         String[] imagenes = { "images/meatR.png", "images/cabbageR.png", "images/vegetableR.png", "images/lemonR.png",
-                "images/molcajeteR.png",
-                "images/onionR.png", "images/pepino.png" };
-        int[] tiempoIngrediente = { 2, 2, 6, 3, 7, 3, 5 };
+                "images/pepino.png", "images/molcajeteR.png",
+                "images/onionR.png" };
+        // int[] tiempoIngrediente = { 2, 2, 6, 3, 5, 7, 3 };
         String[] url = { "images/tortilla.png", "images/fullTaco.png" };
 
         Imagenes tortilla = new Imagenes(url);
@@ -59,6 +61,17 @@ public class Simulacion extends JFrame {
         Texto txt8 = new Texto();
         Texto txt9 = new Texto();
 
+        Texto tTortilla = new Texto("4");
+        Texto tCarne = new Texto("2");
+        Texto tRepollo = new Texto("2");
+        Texto tVerdura = new Texto("6");
+        Texto tLimon = new Texto("3");
+        Texto tPepino = new Texto("5");
+        Texto tSalsa = new Texto("7");
+        Texto tCM = new Texto("3");
+
+        Texto[] tiempos = { tTortilla, tCarne, tRepollo, tVerdura, tLimon, tPepino, tSalsa, tCM };
+
         ingrediente.pedidosCompletados = et20;
         ingrediente.nombreIngrediente = nombreIngrediente;
         ingrediente.tm1 = tm1;
@@ -66,12 +79,12 @@ public class Simulacion extends JFrame {
         ingrediente.url = url;
         ingrediente.ingredientes = ingredientes;
         ingrediente.imagenes = imagenes;
-        ingrediente.tiempoImagenes = tiempoIngrediente;
+        // ingrediente.tiempoImagenes = tiempoIngrediente;
 
-        Botoncito btn1 = new Botoncito("images/power.png","Iniciar");
-        Botoncito btn2 = new Botoncito("images/pause.png","Pausar");
+        Botoncito btn1 = new Botoncito("images/start.png", "Iniciar");
+        Botoncito btn2 = new Botoncito("images/pause.png", "Pausar");
         // Botoncito btn3 = new Botoncito("Reanudar");
-        Botoncito btn4 = new Botoncito("images/stop.png","Parar");
+        Botoncito btn4 = new Botoncito("images/stop.png", "Parar");
 
         ingrediente.btn1 = btn1;
         ingrediente.btn2 = btn2;
@@ -96,8 +109,14 @@ public class Simulacion extends JFrame {
         txt8.addKeyListener(ka);
         txt9.addKeyListener(ka);
 
-        btn1.txt1 = txt9;
+        for (int i = 0; i < tiempos.length; i++) {
+            tiempos[i].addKeyListener(ka);
+        }
 
+        btn1.txt1 = txt9;
+        btn1.tiempos = tiempos;
+        btn2.tiempos = tiempos;
+        btn4.tiempos = tiempos;
         btn2.setEnabled(false);
         btn4.setEnabled(false);
 
@@ -112,7 +131,7 @@ public class Simulacion extends JFrame {
         // btn3.img1 = ingrediente;
         btn4.tm1 = tm1;
 
-        btn1.btn1=btn1;
+        btn1.btn1 = btn1;
         btn1.btn2 = btn2;
         btn1.btn4 = btn4;
 
@@ -134,7 +153,7 @@ public class Simulacion extends JFrame {
         et7.setBounds(10, 170, 100, 25);
         et8.setBounds(10, 190, 100, 25);
         titulo.setBounds(90, 10, 500, 18);
-        tortilla.setBounds(340, 50, 256, 256);
+        tortilla.setBounds(400, 50, 256, 256);
         nombreIngrediente.setBounds(370, 320, 200, 25);
         et9.setBounds(10, 30, 120, 25);
         et10.setBounds(10, 320, 120, 25);
@@ -150,6 +169,11 @@ public class Simulacion extends JFrame {
         txt8.setBounds(130, 192, 50, 20);
         txt9.setBounds(130, 32, 50, 20);
 
+        for (int i = 0; i < tiempos.length; i++) {
+            tiempos[i].setBounds(230, 52 + n, 50, 20);
+            n += 20;
+        }
+
         et11.setBounds(185, 50, 100, 20);
         et12.setBounds(185, 70, 100, 20);
         et13.setBounds(185, 90, 100, 20);
@@ -161,10 +185,12 @@ public class Simulacion extends JFrame {
         et19.setBounds(10, 340, 120, 25);
         et20.setBounds(120, 340, 50, 25);
 
+        et21.setBounds(230, 30, 100, 20);
+
         btn1.setBounds(10, 230, 32, 32);
-        btn2.setBounds(45, 230,32,32);
+        btn2.setBounds(45, 230, 32, 32);
         // btn3.setBounds(10,290,90,20);
-        btn4.setBounds(80, 230,32,32);
+        btn4.setBounds(80, 230, 32, 32);
         // Acciones
         btn1.addActionListener(btn1);
         btn2.addActionListener(btn2);
@@ -181,6 +207,10 @@ public class Simulacion extends JFrame {
         add(et8);
         add(et9);
 
+        for (int i = 0; i < tiempos.length; i++) {
+            add(tiempos[i]);
+        }
+
         add(et11);
         add(et12);
         add(et13);
@@ -192,6 +222,8 @@ public class Simulacion extends JFrame {
 
         add(et19);
         add(et20);
+
+        add(et21);
 
         add(titulo);
         add(et10);
