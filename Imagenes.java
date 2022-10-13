@@ -2,12 +2,13 @@ import javax.swing.*;
 
 public class Imagenes extends JLabel implements Runnable {
    Imagenes img1;
-   Botoncito btn1,btn2,btn3;
+   Botoncito btn1, btn2, btn3;
    Etiquetas nombreIngrediente, pedidosCompletados;
-   Texto txt1;
+   Texto txt1, txt9;
+   Texto[] txtIngredientes;
    Timer tm1;
-   private int[] cantTacos = {1,100,50,20,10,100,100,30};
-   Container cnt; 
+   private int[] cantTacos = { 1, 100, 50, 20, 10, 100, 100, 30 };
+   Container cnt;
    String url[];
    String ingredientes[];
    String imagenes[];
@@ -33,7 +34,9 @@ public class Imagenes extends JLabel implements Runnable {
       // Recorre el arreglo de los ingredientes
       //
       out: while (j < ingredientes.length && pedidosListos < Integer.parseInt(txt1.getText().toString())) {
-         if (cnt.getTortilla()<cantTacos[0]) {
+         if (cnt.getTortilla() < cantTacos[0] || cnt.getCarne() < cantTacos[1] || cnt.getRepollo() < cantTacos[2]
+               || cnt.getVerdura() < cantTacos[3] || cnt.getLimon() < cantTacos[4] || cnt.getPepino() < cantTacos[5]
+               || cnt.getSalsa() < cantTacos[6] || cnt.getCebolla() < cantTacos[7]) {
             btn1.setEnabled(true);
             btn2.setEnabled(false);
             btn3.setEnabled(false);
@@ -55,8 +58,8 @@ public class Imagenes extends JLabel implements Runnable {
                      break out;
                   }
                }
-               time = (tiempoImagenes[j+1] * 1000) / 51;
-               Thread.sleep((int)time);
+               time = (tiempoImagenes[j + 1] * 1000) / 51;
+               Thread.sleep((int) time);
                imagen1 = new ImageIcon(this.getClass().getResource(imagenes[j]));
                setIcon(imagen1);
                if (random == 1) {
@@ -73,7 +76,6 @@ public class Imagenes extends JLabel implements Runnable {
                   posXopt3 -= 1;
                }
 
-               
                if (j == ingredientes.length - 1 && i == 450) {
                   if (!parar) {
                      pedidosListos += 1;
@@ -87,8 +89,9 @@ public class Imagenes extends JLabel implements Runnable {
          n = 0;
          posXopt3 = 495;
          if (pedidosListos == Integer.parseInt(txt1.getText().toString())) {
+            restarIngredientes();
             tm1.stopHilo();
-	         btn1.setEnabled(true);
+            btn1.setEnabled(true);
             btn2.setEnabled(false);
             btn3.setEnabled(false);
             btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
@@ -99,8 +102,8 @@ public class Imagenes extends JLabel implements Runnable {
             } else if (j == ingredientes.length - 1) {
                try {
                   nombreIngrediente.setText("Taco completo. Colocando tortilla");
-                  cnt.setTortilla(cnt.getTortilla()-1);
-                  Thread.sleep((int)(tiempoImagenes[0]*1000));
+                  restarIngredientes();
+                  Thread.sleep((int) (tiempoImagenes[0] * 1000));
                   img1.setIcon(new ImageIcon(this.getClass().getResource(url[0])));
                } catch (Exception e) {
                }
@@ -125,6 +128,25 @@ public class Imagenes extends JLabel implements Runnable {
       parar = true;
       pausar = false;
       notify();
+   }
+
+   private void restarIngredientes() {
+      cnt.setTortilla(cnt.getTortilla() - cantTacos[0]);
+      cnt.setCarne(cnt.getCarne() - cantTacos[1]);
+      cnt.setRepollo(cnt.getRepollo() - cantTacos[2]);
+      cnt.setVerdura(cnt.getVerdura() - cantTacos[3]);
+      cnt.setLimon(cnt.getLimon() - cantTacos[4]);
+      cnt.setPepino(cnt.getPepino() - cantTacos[5]);
+      cnt.setSalsa(cnt.getSalsa() - cantTacos[6]);
+      cnt.setCebolla(cnt.getCebolla() - cantTacos[7]);
+      txtIngredientes[0].setText(Integer.toString(cnt.getTortilla()));
+      txtIngredientes[1].setText(Integer.toString(cnt.getCarne()));
+      txtIngredientes[2].setText(Integer.toString(cnt.getRepollo()));
+      txtIngredientes[3].setText(Integer.toString(cnt.getVerdura()));
+      txtIngredientes[4].setText(Integer.toString(cnt.getLimon()));
+      txtIngredientes[5].setText(Integer.toString(cnt.getPepino()));
+      txtIngredientes[6].setText(Integer.toString(cnt.getSalsa()));
+      txtIngredientes[7].setText(Integer.toString(cnt.getCebolla()));
    }
 
    private static int getRandom(int min, int max) {
