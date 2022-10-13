@@ -5,9 +5,11 @@ import java.awt.*;
 public class Simulacion extends JFrame {
     private int n = 0;
     Container cnt;
+    RContainer rcnt;
 
     public Simulacion() {
         cnt = new Container();
+        rcnt = new RContainer();
         initValues();
     }
 
@@ -130,6 +132,7 @@ public class Simulacion extends JFrame {
         btn2.cnt = cnt;
         btn4.cnt = cnt;
         btn5.cnt = cnt;
+        btn1.rcnt = rcnt;
         btn1.tiempos = tiempos;
         btn2.tiempos = tiempos;
         btn4.tiempos = tiempos;

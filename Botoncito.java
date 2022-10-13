@@ -6,11 +6,12 @@ import java.awt.event.*;
 public class Botoncito extends JButton implements ActionListener {
   Imagenes img1;
   Texto txt1;
-  Texto[] tiempos,cantidades;
+  Texto[] tiempos, cantidades;
   Container cnt;
+  RContainer rcnt;
   Timer tm1;
   Etiquetas pedidos;
-  Botoncito btn1, btn2, btn4,btn5;
+  Botoncito btn1, btn2, btn4, btn5;
   private int cont = 0;
   private double[] tiempoIngrediente;
 
@@ -44,10 +45,10 @@ public class Botoncito extends JButton implements ActionListener {
           }
           setCantidades();
           comprobar();
-
+          setRCantidades();
           img1.tiempoImagenes = tiempoIngrediente;
-          img1.cnt=cnt;
-          img1.txt9=txt1;
+          img1.cnt = cnt;
+          img1.txt9 = txt1;
           img1.txtIngredientes = cantidades;
           setEnabled(false);
           btn2.setEnabled(true);
@@ -87,7 +88,7 @@ public class Botoncito extends JButton implements ActionListener {
       btn2.setEnabled(false);
       btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
     }
-    if (e.getSource()==btn5) {
+    if (e.getSource() == btn5) {
       setDefaults();
     }
 
@@ -115,7 +116,8 @@ public class Botoncito extends JButton implements ActionListener {
     cnt.setSalsa(0);
     cnt.setCebolla(0);
   }
-  private void setCantidades(){
+
+  private void setCantidades() {
     cnt.setTortilla(Integer.parseInt(cantidades[0].getText()));
     cnt.setCarne(Integer.parseInt(cantidades[1].getText()));
     cnt.setRepollo(Integer.parseInt(cantidades[2].getText()));
@@ -125,14 +127,35 @@ public class Botoncito extends JButton implements ActionListener {
     cnt.setSalsa(Integer.parseInt(cantidades[6].getText()));
     cnt.setCebolla(Integer.parseInt(cantidades[7].getText()));
   }
-  private void comprobar(){
-    System.out.println("Cantidad de tortillas: "+cnt.getTortilla());
-    System.out.println("Cantidad de carne: "+cnt.getCarne());
-    System.out.println("Cantidad de repollo: "+cnt.getRepollo());
-    System.out.println("Cantidad de verdura: "+cnt.getVerdura());
-    System.out.println("Cantidad de limon: "+cnt.getLimon());
-    System.out.println("Cantidad de pepino: "+cnt.getPepino());
-    System.out.println("Cantidad de salsa: "+cnt.getSalsa());
-    System.out.println("Cantidad de cebolla: "+cnt.getCebolla());
+
+  private void comprobar() {
+    System.out.println("Cantidad de tortillas: " + cnt.getTortilla());
+    System.out.println("Cantidad de carne: " + cnt.getCarne());
+    System.out.println("Cantidad de repollo: " + cnt.getRepollo());
+    System.out.println("Cantidad de verdura: " + cnt.getVerdura());
+    System.out.println("Cantidad de limon: " + cnt.getLimon());
+    System.out.println("Cantidad de pepino: " + cnt.getPepino());
+    System.out.println("Cantidad de salsa: " + cnt.getSalsa());
+    System.out.println("Cantidad de cebolla: " + cnt.getCebolla());
+  }
+
+  public void setRCantidades() {
+    rcnt.setRTortilla(Integer.parseInt(cantidades[0].getText()));
+    rcnt.setRCarne(Integer.parseInt(cantidades[1].getText()));
+    rcnt.setRRepollo(Integer.parseInt(cantidades[2].getText()));
+    rcnt.setRVerdura(Integer.parseInt(cantidades[3].getText()));
+    rcnt.setRLimon(Integer.parseInt(cantidades[4].getText()));
+    rcnt.setRPepino(Integer.parseInt(cantidades[5].getText()));
+    rcnt.setRSalsa(Integer.parseInt(cantidades[6].getText()));
+    rcnt.setRCebolla(Integer.parseInt(cantidades[7].getText()));
+
+    System.out.println("Cantidad de rtortillas: " + rcnt.getRTortilla());
+    System.out.println("Cantidad de rcarne: " + rcnt.getRCarne());
+    System.out.println("Cantidad de rrepollo: " + rcnt.getRRepollo());
+    System.out.println("Cantidad de rverdura: " + rcnt.getRVerdura());
+    System.out.println("Cantidad de rlimon: " + rcnt.getRLimon());
+    System.out.println("Cantidad de rpepino: " + rcnt.getRPepino());
+    System.out.println("Cantidad de rsalsa: " + rcnt.getRSalsa());
+    System.out.println("Cantidad de rcebolla: " + rcnt.getRCebolla());
   }
 }
