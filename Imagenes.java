@@ -6,10 +6,11 @@ public class Imagenes extends JLabel implements Runnable {
    Etiquetas nombreIngrediente, pedidosCompletados;
    Texto txt1;
    Timer tm1;
+   Container cnt; 
    String url[];
    String ingredientes[];
    String imagenes[];
-   int[] tiempoImagenes;
+   double[] tiempoImagenes;
    ImageIcon imagen1;
 
    public Imagenes(String[] url) {
@@ -25,7 +26,8 @@ public class Imagenes extends JLabel implements Runnable {
    public void run() {
       img1.setIcon(new ImageIcon(this.getClass().getResource(url[0])));
       parar = false;
-      int n = 0, random = 0, posXopt3 = 495, time = 0, j = 0, pedidosListos = 0;
+      int n = 0, random = 0, posXopt3 = 495, j = 0, pedidosListos = 0;
+      double time = 0;
       out: while (j < ingredientes.length && pedidosListos < Integer.parseInt(txt1.getText().toString())) {
          nombreIngrediente.setText("Agregando " + ingredientes[j]);
          nombreIngrediente.setHorizontalAlignment(SwingConstants.CENTER);
@@ -41,7 +43,7 @@ public class Imagenes extends JLabel implements Runnable {
                   }
                }
                time = (tiempoImagenes[j+1] * 1000) / 51;
-               Thread.sleep(time);
+               Thread.sleep((int)time);
                imagen1 = new ImageIcon(this.getClass().getResource(imagenes[j]));
                setIcon(imagen1);
                if (random == 1) {
@@ -84,7 +86,7 @@ public class Imagenes extends JLabel implements Runnable {
             } else if (j == ingredientes.length - 1) {
                try {
                   nombreIngrediente.setText("Taco completo. Colocando tortilla");
-                  Thread.sleep(tiempoImagenes[0]*1000);
+                  Thread.sleep((int)(tiempoImagenes[0]*1000));
                   img1.setIcon(new ImageIcon(this.getClass().getResource(url[0])));
                } catch (Exception e) {
                }
