@@ -6,6 +6,7 @@ public class Imagenes extends JLabel implements Runnable {
    Etiquetas nombreIngrediente, pedidosCompletados;
    Texto txt1;
    Timer tm1;
+   private int[] cantTacos = {1,100,50,20,10,100,100,30};
    Container cnt; 
    String url[];
    String ingredientes[];
@@ -28,11 +29,23 @@ public class Imagenes extends JLabel implements Runnable {
       parar = false;
       int n = 0, random = 0, posXopt3 = 495, j = 0, pedidosListos = 0;
       double time = 0;
+      //
+      // Recorre el arreglo de los ingredientes
+      //
       out: while (j < ingredientes.length && pedidosListos < Integer.parseInt(txt1.getText().toString())) {
+         if (cnt.getTortilla()<cantTacos[0]) {
+            btn1.setEnabled(true);
+            btn2.setEnabled(false);
+            btn3.setEnabled(false);
+            btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
+            tm1.stopHilo();
+            nombreIngrediente.setText("Faltan ingredientes. Fin del pedido");
+            break out;
+         }
          nombreIngrediente.setText("Agregando " + ingredientes[j]);
          nombreIngrediente.setHorizontalAlignment(SwingConstants.CENTER);
          random = getRandom(1, 3);
-         for (int i = 400; i <= 450; i++) {
+         for (int i = 400; i <= 450; i++) { // Cambio de posicion de imagenes de los ingredientes
             try {
                synchronized (this) {
                   while (pausar) {
@@ -60,7 +73,7 @@ public class Imagenes extends JLabel implements Runnable {
                   posXopt3 -= 1;
                }
 
-               // }
+               
                if (j == ingredientes.length - 1 && i == 450) {
                   if (!parar) {
                      pedidosListos += 1;
@@ -86,6 +99,7 @@ public class Imagenes extends JLabel implements Runnable {
             } else if (j == ingredientes.length - 1) {
                try {
                   nombreIngrediente.setText("Taco completo. Colocando tortilla");
+                  cnt.setTortilla(cnt.getTortilla()-1);
                   Thread.sleep((int)(tiempoImagenes[0]*1000));
                   img1.setIcon(new ImageIcon(this.getClass().getResource(url[0])));
                } catch (Exception e) {
