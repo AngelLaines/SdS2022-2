@@ -37,7 +37,7 @@ public class Simulacion extends JFrame {
         Etiquetas et18 = new Etiquetas("g.");
         Etiquetas et19 = new Etiquetas("Pedidos Hechos: ");
         Etiquetas et20 = new Etiquetas("0");
-        Etiquetas et21 = new Etiquetas("Tiempos");
+        Etiquetas et21 = new Etiquetas("Tiempos (segs.)");
         Etiquetas nombreIngrediente = new Etiquetas();
         //
         // Temporizador
