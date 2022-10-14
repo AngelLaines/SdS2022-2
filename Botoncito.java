@@ -70,6 +70,7 @@ public class Botoncito extends JButton implements ActionListener {
         for (int i = 0; i < tiempoIngrediente.length; i++) {
           tiempoIngrediente[i] = Double.parseDouble(tiempos[i].getText().toString());
         }
+        evaluarCantidades();
         setCantidades();
         comprobar();
         img1.tiempoImagenes = tiempoIngrediente;
@@ -139,7 +140,7 @@ public class Botoncito extends JButton implements ActionListener {
     System.out.println("Cantidad de cebolla: " + cnt.getCebolla());
   }
 
-  public void setRCantidades() {
+  private void setRCantidades() {
     rcnt.setRTortilla(Integer.parseInt(cantidades[0].getText()));
     rcnt.setRCarne(Integer.parseInt(cantidades[1].getText()));
     rcnt.setRRepollo(Integer.parseInt(cantidades[2].getText()));
@@ -157,5 +158,39 @@ public class Botoncito extends JButton implements ActionListener {
     System.out.println("Cantidad de rpepino: " + rcnt.getRPepino());
     System.out.println("Cantidad de rsalsa: " + rcnt.getRSalsa());
     System.out.println("Cantidad de rcebolla: " + rcnt.getRCebolla());
+  }
+  private void evaluarCantidades(){
+    if (Integer.parseInt(cantidades[0].getText())!=cnt.getTortilla()) {
+      rcnt.setRTortilla(rcnt.getRTortilla()+Integer.parseInt(cantidades[0].getText()));
+      System.out.println(rcnt.getRTortilla());
+    }
+    if (Integer.parseInt(cantidades[1].getText())!=cnt.getCarne()) {
+      rcnt.setRCarne(rcnt.getRCarne()+Integer.parseInt(cantidades[1].getText()));
+      System.out.println(rcnt.getRCarne());
+    }
+    if (Integer.parseInt(cantidades[2].getText())!=cnt.getRepollo()) {
+      rcnt.setRRepollo(rcnt.getRRepollo()+Integer.parseInt(cantidades[2].getText()));
+      System.out.println(rcnt.getRRepollo());
+    }
+    if (Integer.parseInt(cantidades[3].getText())!=cnt.getVerdura()) {
+      rcnt.setRVerdura(rcnt.getRVerdura()+Integer.parseInt(cantidades[3].getText()));
+      System.out.println(rcnt.getRVerdura());
+    }
+    if (Integer.parseInt(cantidades[4].getText())!=cnt.getLimon()) {
+      rcnt.setRLimon(rcnt.getRLimon()+Integer.parseInt(cantidades[4].getText()));
+      System.out.println(rcnt.getRLimon());
+    }
+    if (Integer.parseInt(cantidades[5].getText())!=cnt.getPepino()) {
+      rcnt.setRPepino(rcnt.getRPepino()+Integer.parseInt(cantidades[5].getText()));
+      System.out.println(rcnt.getRPepino());
+    }
+    if (Integer.parseInt(cantidades[6].getText())!=cnt.getSalsa()) {
+      rcnt.setRSalsa(rcnt.getRSalsa()+Integer.parseInt(cantidades[6].getText()));
+      System.out.println(rcnt.getRSalsa());
+    }
+    if (Integer.parseInt(cantidades[7].getText())!=cnt.getCebolla()) {
+      rcnt.setRCebolla(rcnt.getRCebolla()+Integer.parseInt(cantidades[7].getText()));
+      System.out.println(rcnt.getRCebolla());
+    }
   }
 }

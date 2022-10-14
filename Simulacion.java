@@ -133,6 +133,7 @@ public class Simulacion extends JFrame {
         btn4.cnt = cnt;
         btn5.cnt = cnt;
         btn1.rcnt = rcnt;
+        btn2.rcnt = rcnt;
         btn1.tiempos = tiempos;
         btn2.tiempos = tiempos;
         btn4.tiempos = tiempos;
