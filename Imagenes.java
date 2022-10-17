@@ -9,6 +9,7 @@ public class Imagenes extends JLabel implements Runnable {
    Timer tm1;
    private int[] cantTacos = { 1, 100, 50, 20, 10, 100, 100, 30 };
    Container cnt;
+   RContainer rcnt;
    String url[];
    String ingredientes[];
    String imagenes[];
@@ -96,6 +97,7 @@ public class Imagenes extends JLabel implements Runnable {
             btn3.setEnabled(false);
             btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
             nombreIngrediente.setText("Taco completo. Fin del pedido");
+            Resultados r = new Resultados(rcnt);
          } else {
             if (j < ingredientes.length - 1) {
                j++;

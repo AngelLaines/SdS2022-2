@@ -119,6 +119,7 @@ public class Simulacion extends JFrame {
         ingrediente.btn1 = btn1;
         ingrediente.btn2 = btn2;
         ingrediente.btn3 = btn4;
+        ingrediente.rcnt=rcnt;
         ingrediente.pedidosCompletados = et20;
         ingrediente.nombreIngrediente = nombreIngrediente;
         ingrediente.tm1 = tm1;

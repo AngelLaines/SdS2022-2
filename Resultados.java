@@ -1,8 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Resultados extends JFrame {
-    public Resultados() {
+public class Resultados extends JDialog {
+    Container cnt;
+    RContainer rcnt;
+    public Resultados(RContainer rcnt) {
+        this.rcnt=rcnt;
         initComponents();
     }
 
@@ -15,15 +18,26 @@ public class Resultados extends JFrame {
         Etiquetas subtitulo1 = new Etiquetas("Cantidad de Material Utilizado");
         Etiquetas subtitulo2 = new Etiquetas("Cantidad de Material Sobrante");
         Etiquetas subtitulo3 = new Etiquetas("Material");
+
         Etiquetas et1 = new Etiquetas("Tortilla");
         Etiquetas et2 = new Etiquetas("Carne Asada");
         Etiquetas et3 = new Etiquetas("Repollo");
-        Etiquetas et4 = new Etiquetas("Tortilla");
         Etiquetas et5 = new Etiquetas("Verdura");
         Etiquetas et6 = new Etiquetas("Limon");
         Etiquetas et7 = new Etiquetas("Pepino");
         Etiquetas et8 = new Etiquetas("Salsa");
         Etiquetas et9 = new Etiquetas("Cebolla Morada");
+
+        Etiquetas RTortilla = new Etiquetas(Integer.toString(rcnt.getRTortilla()));
+        Etiquetas RCarne = new Etiquetas(Integer.toString(rcnt.getRCarne()));
+        Etiquetas RRepollo = new Etiquetas(Integer.toString(rcnt.getRRepollo()));
+        Etiquetas RVerdura = new Etiquetas(Integer.toString(rcnt.getRVerdura()));
+        Etiquetas RLimon = new Etiquetas(Integer.toString(rcnt.getRLimon()));
+        Etiquetas RPepino = new Etiquetas(Integer.toString(rcnt.getRPepino()));
+        Etiquetas RSalsa = new Etiquetas(Integer.toString(rcnt.getRSalsa()));
+        Etiquetas RCebolla = new Etiquetas(Integer.toString(rcnt.getRCebolla()));
+
+        
         Etiquetas cantidadPedido = new Etiquetas("Cantidad de tacos pedidos: 000");
 
         titulo.setBounds(150, 10, 500, 18);
@@ -32,16 +46,23 @@ public class Resultados extends JFrame {
         subtitulo1.setBounds(120, 40, 200, 25);
         subtitulo2.setBounds(310, 40, 200, 25);
 
-        et1.setBounds(10, 60, 100, 25);
-        et2.setBounds(10, 80, 100, 25);
-        et3.setBounds(10, 100, 100, 25);
-        et4.setBounds(10, 120, 100, 25);
+        et1.setBounds(10, 80, 100, 25);
+        et2.setBounds(10, 100, 100, 25);
+        et3.setBounds(10, 120, 100, 25);
         et5.setBounds(10, 140, 100, 25);
         et6.setBounds(10, 160, 100, 25);
         et7.setBounds(10, 180, 100, 25);
         et8.setBounds(10, 200, 100, 25);
         et9.setBounds(10, 220, 100, 25);
 
+        RTortilla.setBounds(120, 80, 200, 25);
+        RCarne.setBounds(120, 100, 200, 25);
+        RRepollo.setBounds(120, 120, 200, 25);
+        RVerdura.setBounds(120, 140, 200, 25);
+        RLimon.setBounds(120, 160, 200, 25);
+        RPepino.setBounds(120, 180, 200, 25);
+        RSalsa.setBounds(120, 200, 200, 25);
+        RCebolla.setBounds(120, 220, 200, 25);
         cantidadPedido.setBounds(10, 260, 400, 25);
 
         add(titulo);
@@ -53,12 +74,21 @@ public class Resultados extends JFrame {
         add(et1);
         add(et2);
         add(et3);
-        add(et4);
         add(et5);
         add(et6);
         add(et7);
         add(et8);
         add(et9);
+
+        add(RTortilla);
+        add(RCarne);
+        add(RRepollo);
+        add(RVerdura);
+        add(RLimon);
+        add(RPepino);
+        add(RSalsa);
+        add(RCebolla);
+        add(cantidadPedido);
 
         add(cantidadPedido);
 
@@ -66,8 +96,9 @@ public class Resultados extends JFrame {
         setSize(600, 400);
         setResizable(false);
         setLayout(null);
+        setModal(true);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 }
