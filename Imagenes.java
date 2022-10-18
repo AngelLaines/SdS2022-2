@@ -18,6 +18,7 @@ public class Imagenes extends JLabel implements Runnable {
 
    public Imagenes(String[] url) {
       imagen1 = new ImageIcon(this.getClass().getResource(url[0]));
+      
       setIcon(imagen1);
    }
 
@@ -27,6 +28,7 @@ public class Imagenes extends JLabel implements Runnable {
    boolean pausar, parar;
 
    public void run() {
+      tm1.rcnt=rcnt;
       img1.setIcon(new ImageIcon(this.getClass().getResource(url[0])));
       parar = false;
       int n = 0, random = 0, posXopt3 = 495, j = 0, pedidosListos = 0;
@@ -37,13 +39,15 @@ public class Imagenes extends JLabel implements Runnable {
       out: while (j < ingredientes.length && pedidosListos < Integer.parseInt(txt1.getText().toString())) {
          if (cnt.getTortilla() < cantTacos[0] || cnt.getCarne() < cantTacos[1] || cnt.getRepollo() < cantTacos[2]
                || cnt.getVerdura() < cantTacos[3] || cnt.getLimon() < cantTacos[4] || cnt.getPepino() < cantTacos[5]
-               || cnt.getSalsa() < cantTacos[6] || cnt.getCebolla() < cantTacos[7]) {
+               || cnt.getSalsa() < cantTacos[6] || cnt.getCebolla() < cantTacos[7] || tiempoImagenes[0]==0.0 ||
+               tiempoImagenes[1]==0.0 || tiempoImagenes[2]==0.0 || tiempoImagenes[3]==0.0 || tiempoImagenes[4]==0.0 || 
+               tiempoImagenes[5]==0.0 || tiempoImagenes[6]==0.0 || tiempoImagenes[7]==0.0) {
             btn1.setEnabled(true);
             btn2.setEnabled(false);
             btn3.setEnabled(false);
             btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
             tm1.stopHilo();
-            nombreIngrediente.setText("Faltan ingredientes. Fin del pedido");
+            JOptionPane.showMessageDialog(null,"Faltan ingredientes. Fin del pedido","Advertencia", JOptionPane.WARNING_MESSAGE);
             break out;
          }
          nombreIngrediente.setText("Agregando " + ingredientes[j]);
@@ -97,7 +101,7 @@ public class Imagenes extends JLabel implements Runnable {
             btn3.setEnabled(false);
             btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
             nombreIngrediente.setText("Taco completo. Fin del pedido");
-            Resultados r = new Resultados(rcnt);
+            Resultados r = new Resultados(rcnt,cnt);
          } else {
             if (j < ingredientes.length - 1) {
                j++;

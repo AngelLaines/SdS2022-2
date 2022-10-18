@@ -1,5 +1,6 @@
 public class RContainer {
-    private int rTortilla=0,rCarne=0,rRepollo=0,rVerdura=0,rLimon=0,rPepino=0,rSalsa=0,rCebolla=0;
+    private int rTortilla=0,rCarne=0,rRepollo=0,rVerdura=0,rLimon=0,rPepino=0,rSalsa=0,rCebolla=0,pedidos=0;
+    private String time="";
     //
     // SETTERS
     //
@@ -11,6 +12,8 @@ public class RContainer {
     public void setRPepino(int rPepino){this.rPepino = rPepino;}
     public void setRSalsa(int rSalsa){this.rSalsa = rSalsa;}
     public void setRCebolla(int rCebolla){this.rCebolla = rCebolla;}
+    public void setPedidos(int pedidos){this.pedidos = pedidos;}
+    public void setTime(String time){this.time = time;}
     //
     // GETTERS
     //
@@ -22,4 +25,6 @@ public class RContainer {
     public int getRPepino(){return this.rPepino;}
     public int getRSalsa(){return this.rSalsa;}
     public int getRCebolla(){return this.rCebolla;}
+    public int getPedidos(){return pedidos;}
+    public String getTime(){return this.time;}
 }

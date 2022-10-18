@@ -2,7 +2,8 @@ import javax.swing.*;
 
 public class Timer extends JLabel implements Runnable {
   boolean pausar, stop;
-
+  RContainer rcnt;
+  private String cronometro = "";
   public Timer(String name) {
     setText(name);
   }
@@ -11,7 +12,7 @@ public class Timer extends JLabel implements Runnable {
 
     stop = false;
     int segundo = 1, minuto = 0, hora = 0;
-    String cronometro = "", segundos = "", minutos = "", horas = "";
+    String segundos = "", minutos = "", horas = "";
     out: while (true) {
       try {
         synchronized (this) {
@@ -52,6 +53,7 @@ public class Timer extends JLabel implements Runnable {
           minuto = 0;
         }
         setText(cronometro);
+        rcnt.setTime(cronometro);
         segundo++;
 
       } catch (Exception e) {

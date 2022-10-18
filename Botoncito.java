@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 public class Botoncito extends JButton implements ActionListener {
   Imagenes img1;
+  Etiquetas etiqueta;
   Texto txt1;
   Texto[] tiempos, cantidades;
   Container cnt;
@@ -33,30 +34,30 @@ public class Botoncito extends JButton implements ActionListener {
       Thread t2 = new Thread(tm1);
       if (txt1.getText().toString().equals("")) {
         JOptionPane.showMessageDialog(null, "Ingrese un numero en pedidos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+      } else if (Integer.parseInt(txt1.getText().toString()) < 1) {
+        JOptionPane.showMessageDialog(null, "Ingrese un numero mayor a 0 en pedidos", "Advertencia",
+            JOptionPane.WARNING_MESSAGE);
       } else {
-        if (Integer.parseInt(txt1.getText().toString()) < 1) {
-          JOptionPane.showMessageDialog(null, "Ingrese un numero mayor a 0 en pedidos", "Advertencia",
-              JOptionPane.WARNING_MESSAGE);
-        } else {
-          img1.txt1 = txt1;
-          tiempoIngrediente = new double[tiempos.length];
-          for (int i = 0; i < tiempoIngrediente.length; i++) {
-            tiempoIngrediente[i] = Double.parseDouble(tiempos[i].getText().toString());
-          }
-          setCantidades();
-          comprobar();
-          setRCantidades();
-          img1.tiempoImagenes = tiempoIngrediente;
-          img1.cnt = cnt;
-          img1.txt9 = txt1;
-          img1.txtIngredientes = cantidades;
-          setEnabled(false);
-          btn2.setEnabled(true);
-          btn4.setEnabled(true);
-          t1.start();
-          t2.start();
+        img1.txt1 = txt1;
+        tiempoIngrediente = new double[tiempos.length];
+        for (int i = 0; i < tiempoIngrediente.length; i++) {
+          tiempoIngrediente[i] = Double.parseDouble(tiempos[i].getText().toString());
         }
+        setCantidades();
+        comprobar();
+        setRCantidades();
+        img1.tiempoImagenes = tiempoIngrediente;
+        img1.cnt = cnt;
+        img1.txt9 = txt1;
+        rcnt.setPedidos(Integer.parseInt(txt1.getText()));
+        img1.txtIngredientes = cantidades;
+        setEnabled(false);
+        btn2.setEnabled(true);
+        btn4.setEnabled(true);
+        t1.start();
+        t2.start();
       }
+
     }
     if (e.getSource() == btn2) {
       // System.out.println("Hola");
@@ -116,6 +117,8 @@ public class Botoncito extends JButton implements ActionListener {
     cnt.setPepino(0);
     cnt.setSalsa(0);
     cnt.setCebolla(0);
+    tm1.setText("00:00:00");
+    etiqueta.setText("0");
   }
 
   private void setCantidades() {
@@ -167,37 +170,38 @@ public class Botoncito extends JButton implements ActionListener {
     System.out.println("Cantidad de rsalsa: " + rcnt.getRSalsa());
     System.out.println("Cantidad de rcebolla: " + rcnt.getRCebolla());
   }
-  private void evaluarCantidades(){
-    if (Integer.parseInt(cantidades[0].getText())!=cnt.getTortilla()) {
-      rcnt.setRTortilla(rcnt.getRTortilla()-cnt.getTortilla()+Integer.parseInt(cantidades[0].getText()));
+
+  private void evaluarCantidades() {
+    if (Integer.parseInt(cantidades[0].getText()) != cnt.getTortilla()) {
+      rcnt.setRTortilla(rcnt.getRTortilla() - cnt.getTortilla() + Integer.parseInt(cantidades[0].getText()));
       System.out.println(rcnt.getRTortilla());
     }
-    if (Integer.parseInt(cantidades[1].getText())!=cnt.getCarne()) {
-      rcnt.setRCarne(rcnt.getRCarne()-cnt.getCarne()+Integer.parseInt(cantidades[1].getText()));
+    if (Integer.parseInt(cantidades[1].getText()) != cnt.getCarne()) {
+      rcnt.setRCarne(rcnt.getRCarne() - cnt.getCarne() + Integer.parseInt(cantidades[1].getText()));
       System.out.println(rcnt.getRCarne());
     }
-    if (Integer.parseInt(cantidades[2].getText())!=cnt.getRepollo()) {
-      rcnt.setRRepollo(rcnt.getRRepollo()-cnt.getRepollo()+Integer.parseInt(cantidades[2].getText()));
+    if (Integer.parseInt(cantidades[2].getText()) != cnt.getRepollo()) {
+      rcnt.setRRepollo(rcnt.getRRepollo() - cnt.getRepollo() + Integer.parseInt(cantidades[2].getText()));
       System.out.println(rcnt.getRRepollo());
     }
-    if (Integer.parseInt(cantidades[3].getText())!=cnt.getVerdura()) {
-      rcnt.setRVerdura(rcnt.getRVerdura()-cnt.getVerdura()+Integer.parseInt(cantidades[3].getText()));
+    if (Integer.parseInt(cantidades[3].getText()) != cnt.getVerdura()) {
+      rcnt.setRVerdura(rcnt.getRVerdura() - cnt.getVerdura() + Integer.parseInt(cantidades[3].getText()));
       System.out.println(rcnt.getRVerdura());
     }
-    if (Integer.parseInt(cantidades[4].getText())!=cnt.getLimon()) {
-      rcnt.setRLimon(rcnt.getRLimon()-cnt.getLimon()+Integer.parseInt(cantidades[4].getText()));
+    if (Integer.parseInt(cantidades[4].getText()) != cnt.getLimon()) {
+      rcnt.setRLimon(rcnt.getRLimon() - cnt.getLimon() + Integer.parseInt(cantidades[4].getText()));
       System.out.println(rcnt.getRLimon());
     }
-    if (Integer.parseInt(cantidades[5].getText())!=cnt.getPepino()) {
-      rcnt.setRPepino(rcnt.getRPepino()-cnt.getPepino()+Integer.parseInt(cantidades[5].getText()));
+    if (Integer.parseInt(cantidades[5].getText()) != cnt.getPepino()) {
+      rcnt.setRPepino(rcnt.getRPepino() - cnt.getPepino() + Integer.parseInt(cantidades[5].getText()));
       System.out.println(rcnt.getRPepino());
     }
-    if (Integer.parseInt(cantidades[6].getText())!=cnt.getSalsa()) {
-      rcnt.setRSalsa(rcnt.getRSalsa()-cnt.getSalsa()+Integer.parseInt(cantidades[6].getText()));
+    if (Integer.parseInt(cantidades[6].getText()) != cnt.getSalsa()) {
+      rcnt.setRSalsa(rcnt.getRSalsa() - cnt.getSalsa() + Integer.parseInt(cantidades[6].getText()));
       System.out.println(rcnt.getRSalsa());
     }
-    if (Integer.parseInt(cantidades[7].getText())!=cnt.getCebolla()) {
-      rcnt.setRCebolla(rcnt.getRCebolla()-cnt.getCebolla()+Integer.parseInt(cantidades[7].getText()));
+    if (Integer.parseInt(cantidades[7].getText()) != cnt.getCebolla()) {
+      rcnt.setRCebolla(rcnt.getRCebolla() - cnt.getCebolla() + Integer.parseInt(cantidades[7].getText()));
       System.out.println(rcnt.getRCebolla());
     }
   }

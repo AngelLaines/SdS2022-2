@@ -119,7 +119,7 @@ public class Simulacion extends JFrame {
         ingrediente.btn1 = btn1;
         ingrediente.btn2 = btn2;
         ingrediente.btn3 = btn4;
-        ingrediente.rcnt=rcnt;
+        ingrediente.rcnt = rcnt;
         ingrediente.pedidosCompletados = et20;
         ingrediente.nombreIngrediente = nombreIngrediente;
         ingrediente.tm1 = tm1;
@@ -133,6 +133,8 @@ public class Simulacion extends JFrame {
         btn2.cnt = cnt;
         btn4.cnt = cnt;
         btn5.cnt = cnt;
+        btn5.etiqueta = et20;
+        btn5.tm1=tm1;
         btn1.rcnt = rcnt;
         btn2.rcnt = rcnt;
         btn1.tiempos = tiempos;

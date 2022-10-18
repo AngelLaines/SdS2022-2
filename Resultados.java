@@ -4,8 +4,9 @@ import java.awt.*;
 public class Resultados extends JDialog {
     Container cnt;
     RContainer rcnt;
-    public Resultados(RContainer rcnt) {
+    public Resultados(RContainer rcnt, Container cnt) {
         this.rcnt=rcnt;
+        this.cnt=cnt;
         initComponents();
     }
 
@@ -14,7 +15,7 @@ public class Resultados extends JDialog {
 
         Etiquetas titulo = new Etiquetas("Resultados obtenidos");
         titulo.setFont(fuente1);
-        Etiquetas tiempo = new Etiquetas("Tiempo transcurrido: 00:00:00");
+        Etiquetas tiempo = new Etiquetas("Tiempo transcurrido: "+rcnt.getTime());
         Etiquetas subtitulo1 = new Etiquetas("Cantidad de Material Utilizado");
         Etiquetas subtitulo2 = new Etiquetas("Cantidad de Material Sobrante");
         Etiquetas subtitulo3 = new Etiquetas("Material");
@@ -37,8 +38,17 @@ public class Resultados extends JDialog {
         Etiquetas RSalsa = new Etiquetas(Integer.toString(rcnt.getRSalsa()));
         Etiquetas RCebolla = new Etiquetas(Integer.toString(rcnt.getRCebolla()));
 
+        Etiquetas CTortilla = new Etiquetas(Integer.toString(cnt.getTortilla()));
+        Etiquetas CCarne = new Etiquetas(Integer.toString(cnt.getCarne()));
+        Etiquetas CRepollo = new Etiquetas(Integer.toString(cnt.getRepollo()));
+        Etiquetas CVerdura = new Etiquetas(Integer.toString(cnt.getVerdura()));
+        Etiquetas CLimon = new Etiquetas(Integer.toString(cnt.getLimon()));
+        Etiquetas CPepino = new Etiquetas(Integer.toString(cnt.getPepino()));
+        Etiquetas CSalsa = new Etiquetas(Integer.toString(cnt.getSalsa()));
+        Etiquetas CCebolla = new Etiquetas(Integer.toString(cnt.getCebolla()));
+
         
-        Etiquetas cantidadPedido = new Etiquetas("Cantidad de tacos pedidos: 000");
+        Etiquetas cantidadPedido = new Etiquetas("Cantidad de tacos pedidos: "+rcnt.getPedidos());
 
         titulo.setBounds(150, 10, 500, 18);
         tiempo.setBounds(10, 300, 300, 25);
@@ -63,6 +73,16 @@ public class Resultados extends JDialog {
         RPepino.setBounds(120, 180, 200, 25);
         RSalsa.setBounds(120, 200, 200, 25);
         RCebolla.setBounds(120, 220, 200, 25);
+
+        CTortilla.setBounds(310, 80, 200, 25);
+        CCarne.setBounds(310, 100, 200, 25);
+        CRepollo.setBounds(310, 120, 200, 25);
+        CVerdura.setBounds(310, 140, 200, 25);
+        CLimon.setBounds(310, 160, 200, 25);
+        CPepino.setBounds(310, 180, 200, 25);
+        CSalsa.setBounds(310, 200, 200, 25);
+        CCebolla.setBounds(310, 220, 200, 25);
+
         cantidadPedido.setBounds(10, 260, 400, 25);
 
         add(titulo);
@@ -88,7 +108,15 @@ public class Resultados extends JDialog {
         add(RPepino);
         add(RSalsa);
         add(RCebolla);
-        add(cantidadPedido);
+
+        add(CTortilla);
+        add(CCarne);
+        add(CRepollo);
+        add(CVerdura);
+        add(CLimon);
+        add(CPepino);
+        add(CSalsa);
+        add(CCebolla);
 
         add(cantidadPedido);
 
