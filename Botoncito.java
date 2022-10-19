@@ -43,12 +43,14 @@ public class Botoncito extends JButton implements ActionListener {
         for (int i = 0; i < tiempoIngrediente.length; i++) {
           tiempoIngrediente[i] = Double.parseDouble(tiempos[i].getText().toString());
         }
+
         setCantidades();
         comprobar();
         setRCantidades();
         img1.tiempoImagenes = tiempoIngrediente;
         img1.cnt = cnt;
         img1.txt9 = txt1;
+        rcnt.setTimes(tiempoIngrediente);
         rcnt.setPedidos(Integer.parseInt(txt1.getText()));
         img1.txtIngredientes = cantidades;
         setEnabled(false);
@@ -71,6 +73,7 @@ public class Botoncito extends JButton implements ActionListener {
         for (int i = 0; i < tiempoIngrediente.length; i++) {
           tiempoIngrediente[i] = Double.parseDouble(tiempos[i].getText().toString());
         }
+        rcnt.setTimes(tiempoIngrediente);
         evaluarCantidades();
         setCantidades();
         comprobar();
