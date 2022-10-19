@@ -61,14 +61,14 @@ public class Simulacion extends JFrame {
         //
         // Campos de texto
         //
-        Texto txt1 = new Texto("0");
-        Texto txt2 = new Texto("0");
-        Texto txt3 = new Texto("0");
-        Texto txt4 = new Texto("0");
-        Texto txt5 = new Texto("0");
-        Texto txt6 = new Texto("0");
-        Texto txt7 = new Texto("0");
-        Texto txt8 = new Texto("0");
+        Texto txt1 = new Texto("1");
+        Texto txt2 = new Texto("100");
+        Texto txt3 = new Texto("50");
+        Texto txt4 = new Texto("20");
+        Texto txt5 = new Texto("10");
+        Texto txt6 = new Texto("100");
+        Texto txt7 = new Texto("100");
+        Texto txt8 = new Texto("30");
         Texto txt9 = new Texto("0");
         Texto tTortilla = new Texto("4.0");
         Texto tCarne = new Texto("2.0");

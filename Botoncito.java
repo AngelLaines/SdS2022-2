@@ -108,9 +108,16 @@ public class Botoncito extends JButton implements ActionListener {
     tiempos[5].setText("5.0");
     tiempos[6].setText("7.0");
     tiempos[7].setText("3.0");
-    for (int i = 0; i < cantidades.length; i++) {
-      cantidades[i].setText("0");
-    }
+
+    cantidades[0].setText("1");
+    cantidades[1].setText("100");
+    cantidades[2].setText("50");
+    cantidades[3].setText("20");
+    cantidades[4].setText("10");
+    cantidades[5].setText("100");
+    cantidades[6].setText("100");
+    cantidades[7].setText("30");
+    
     txt1.setText("0");
     cnt.setTortilla(0);
     cnt.setCarne(0);
