@@ -51,7 +51,7 @@ public class Imagenes extends JLabel implements Runnable {
             JOptionPane.showMessageDialog(null, "Faltan ingredientes. Fin del pedido", "Advertencia",
                   JOptionPane.WARNING_MESSAGE);
 
-            Resultados r = new Resultados(rcnt, cnt);
+            
             break out;
          } else {
             for (int b = 0; b < 8; b++) {
@@ -64,7 +64,8 @@ public class Imagenes extends JLabel implements Runnable {
                   } catch (Exception e) {
                   }
                } else {
-
+                  nombreIngrediente.setText("Agregando " + ingredientes[b-1]);
+                  random = getRandom(1, 3);
                   for (int i = 400; i <= 450; i++) { // Cambio de posicion de imagenes de los ingredientes
                      try {
                         synchronized (this) {
@@ -119,6 +120,11 @@ public class Imagenes extends JLabel implements Runnable {
             }
          }
       }
+      btn1.setEnabled(true);
+      btn2.setEnabled(false);
+      btn3.setEnabled(false);
+      tm1.stopHilo();
+      Resultados r = new Resultados(rcnt, cnt);
       /**
        * 
        * 
@@ -257,36 +263,37 @@ public class Imagenes extends JLabel implements Runnable {
    }
 
    private void restarIngredientes(int j) {
+      
       switch (j) {
-         case 1:
+         case 0:
             cnt.setTortilla(cnt.getTortilla() - cantTacos[0]);
             txtIngredientes[0].setText(Integer.toString(cnt.getTortilla()));
             break;
-         case 2:
+         case 1:
             cnt.setCarne(cnt.getCarne() - cantTacos[1]);
             txtIngredientes[1].setText(Integer.toString(cnt.getCarne()));
             break;
-         case 3:
+         case 2:
             cnt.setRepollo(cnt.getRepollo() - cantTacos[2]);
             txtIngredientes[2].setText(Integer.toString(cnt.getRepollo()));
             break;
-         case 4:
+         case 3:
             cnt.setVerdura(cnt.getVerdura() - cantTacos[3]);
             txtIngredientes[3].setText(Integer.toString(cnt.getVerdura()));
             break;
-         case 5:
+         case 4:
             cnt.setLimon(cnt.getLimon() - cantTacos[4]);
             txtIngredientes[4].setText(Integer.toString(cnt.getLimon()));
             break;
-         case 6:
+         case 5:
             cnt.setPepino(cnt.getPepino() - cantTacos[5]);
             txtIngredientes[5].setText(Integer.toString(cnt.getPepino()));
             break;
-         case 7:
+         case 6:
             cnt.setSalsa(cnt.getSalsa() - cantTacos[6]);
             txtIngredientes[6].setText(Integer.toString(cnt.getSalsa()));
             break;
-         case 8:
+         case 7:
             cnt.setCebolla(cnt.getCebolla() - cantTacos[7]);
             txtIngredientes[7].setText(Integer.toString(cnt.getCebolla()));
             break;
