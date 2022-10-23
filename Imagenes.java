@@ -1,8 +1,9 @@
 import javax.swing.*;
 
 public class Imagenes extends JLabel implements Runnable {
+   private String text="";
    Imagenes img1;
-   Botoncito btn1, btn2, btn3;
+   Botoncito btn1, btn2, btn3,btn5;
    Etiquetas nombreIngrediente, pedidosCompletados;
    Texto txt1, txt9;
    Texto[] txtIngredientes;
@@ -13,7 +14,7 @@ public class Imagenes extends JLabel implements Runnable {
    String url[];
    String ingredientes[];
    String imagenes[];
-   double[] tiempoImagenes;
+   double[] tiempoImagenes,tiemposTotales={0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
    ImageIcon imagen1;
 
    public Imagenes(String[] url) {
@@ -28,6 +29,11 @@ public class Imagenes extends JLabel implements Runnable {
    boolean pausar, parar;
 
    public void run() {
+      for (int i = 0; i < tiemposTotales.length; i++) {
+         tiemposTotales[i]=0.0;
+      }
+      double tiempoT=0.0;
+      text="";
       tm1.rcnt = rcnt;
       img1.setIcon(new ImageIcon(this.getClass().getResource(url[0])));
       parar = false;
@@ -37,19 +43,19 @@ public class Imagenes extends JLabel implements Runnable {
       // Recorre el arreglo de los ingredientes
       //
       out: for (int a = 0; a < Integer.parseInt(txt1.getText().toString()); a++) {
-         if ((cnt.getTortilla() < cantTacos[0] || cnt.getCarne() < cantTacos[1] || cnt.getRepollo() < cantTacos[2]
+         if (cnt.getTortilla() < cantTacos[0] || cnt.getCarne() < cantTacos[1] || cnt.getRepollo() < cantTacos[2]
                || cnt.getVerdura() < cantTacos[3] || cnt.getLimon() < cantTacos[4] || cnt.getPepino() < cantTacos[5]
                || cnt.getSalsa() < cantTacos[6] || cnt.getCebolla() < cantTacos[7] || tiempoImagenes[0] == 0.0 ||
                tiempoImagenes[1] == 0.0 || tiempoImagenes[2] == 0.0 || tiempoImagenes[3] == 0.0
                || tiempoImagenes[4] == 0.0 || tiempoImagenes[5] == 0.0 || tiempoImagenes[6] == 0.0 ||
-               tiempoImagenes[7] == 0.0)) {
+               tiempoImagenes[7] == 0.0 ) {
             btn1.setEnabled(true);
             btn2.setEnabled(false);
             btn3.setEnabled(false);
+            btn5.setEnabled(true);
             btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
             tm1.stopHilo();
-            JOptionPane.showMessageDialog(null, "Faltan ingredientes. Fin del pedido", "Advertencia",
-                  JOptionPane.WARNING_MESSAGE);
+            text = "Faltan ingredientes. Simulacion interrumpida.";
 
             
             break out;
@@ -58,14 +64,21 @@ public class Imagenes extends JLabel implements Runnable {
                if (b == 0) {
                   try {
                      restarIngredientes(b);
+                     tiempoT=tiemposTotales[0] + tiempoImagenes[0];
+                     tiemposTotales[0] = tiempoT;
+                     nombreIngrediente.setText("Colocando Tortilla");
+                     
+                  nombreIngrediente.setHorizontalAlignment(SwingConstants.CENTER);
                      Thread.sleep((int) (tiempoImagenes[0] * 1000));
                      img1.setIcon(new ImageIcon(this.getClass().getResource(url[0])));
-                     nombreIngrediente.setText("Colocando Tortilla");
                   } catch (Exception e) {
                   }
                } else {
                   nombreIngrediente.setText("Agregando " + ingredientes[b-1]);
+                  nombreIngrediente.setHorizontalAlignment(SwingConstants.CENTER);
                   random = getRandom(1, 3);
+                  tiempoT=tiemposTotales[b] + tiempoImagenes[b];
+                  tiemposTotales[b] = tiempoT;
                   for (int i = 400; i <= 450; i++) { // Cambio de posicion de imagenes de los ingredientes
                      try {
                         synchronized (this) {
@@ -73,9 +86,11 @@ public class Imagenes extends JLabel implements Runnable {
                               wait();
                            }
                            if (parar == true) {
+                              text = "Simulacion interrumpida. Resultados obtenidos";
                               break out;
                            }
                         }
+                        
                         time = (tiempoImagenes[b] * 1000) / 51;
                         Thread.sleep((int) time);
                         imagen1 = new ImageIcon(this.getClass().getResource(imagenes[b-1]));
@@ -94,13 +109,13 @@ public class Imagenes extends JLabel implements Runnable {
                            posXopt3 -= 1;
                         }
    
-                        if (a == ingredientes.length - 1 && i == 450) {
+                        /* if (a == ingredientes.length - 1 && i == 450) {
                            if (!parar) {
                               pedidosListos += 1;
                               pedidosCompletados.setText(Integer.toString(pedidosListos));
                               img1.setIcon(new ImageIcon(this.getClass().getResource(url[1])));
                            }
-                        }
+                        } */
                      } catch (Exception e) {
                      }
    
@@ -113,138 +128,23 @@ public class Imagenes extends JLabel implements Runnable {
             try {
                nombreIngrediente.setText("Taco completo.");
                // restarIngredientes();
-
+               pedidosListos++;
+               pedidosCompletados.setText(Integer.toString(pedidosListos));
                //Thread.sleep((int) (tiempoImagenes[0] * 1000));
                img1.setIcon(new ImageIcon(this.getClass().getResource(url[1])));
             } catch (Exception e) {
             }
          }
       }
+      if(text.equals("")){
+         text = "Resultados obtenidos";
+      }
       btn1.setEnabled(true);
       btn2.setEnabled(false);
       btn3.setEnabled(false);
+      btn5.setEnabled(true);
       tm1.stopHilo();
-      Resultados r = new Resultados(rcnt, cnt);
-      /**
-       * 
-       * 
-       * 
-       * 
-       * 
-       * 
-       * 
-       * 
-       * 
-       * out: while (j < ingredientes.length && pedidosListos <
-       * Integer.parseInt(txt1.getText().toString())) {
-       * System.out.println(j);
-       * if ((cnt.getTortilla() < cantTacos[0] || cnt.getCarne() < cantTacos[1] ||
-       * cnt.getRepollo() < cantTacos[2]
-       * || cnt.getVerdura() < cantTacos[3] || cnt.getLimon() < cantTacos[4] ||
-       * cnt.getPepino() < cantTacos[5]
-       * || cnt.getSalsa() < cantTacos[6] || cnt.getCebolla() < cantTacos[7] ||
-       * tiempoImagenes[0] == 0.0 ||
-       * tiempoImagenes[1] == 0.0 || tiempoImagenes[2] == 0.0 || tiempoImagenes[3] ==
-       * 0.0
-       * || tiempoImagenes[4] == 0.0 || tiempoImagenes[5] == 0.0 || tiempoImagenes[6]
-       * == 0.0 ||
-       * tiempoImagenes[7] == 0.0)) {
-       * btn1.setEnabled(true);
-       * btn2.setEnabled(false);
-       * btn3.setEnabled(false);
-       * btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
-       * tm1.stopHilo();
-       * JOptionPane.showMessageDialog(null, "Faltan ingredientes. Fin del pedido",
-       * "Advertencia",
-       * JOptionPane.WARNING_MESSAGE);
-       * 
-       * Resultados r = new Resultados(rcnt, cnt);
-       * break out;
-       * } else {
-       * if (j == 0 && pedidosListos == 0) {
-       * try {
-       * restarIngredientes(j);
-       * Thread.sleep((int) (tiempoImagenes[0] * 1000));
-       * img1.setIcon(new ImageIcon(this.getClass().getResource(url[0])));
-       * nombreIngrediente.setText("Colocando Tortilla");
-       * } catch (Exception e) {
-       * }
-       * }
-       * nombreIngrediente.setText("Agregando " + ingredientes[j]);
-       * nombreIngrediente.setHorizontalAlignment(SwingConstants.CENTER);
-       * random = getRandom(1, 3);
-       * for (int i = 400; i <= 450; i++) { // Cambio de posicion de imagenes de los
-       * ingredientes
-       * try {
-       * synchronized (this) {
-       * while (pausar) {
-       * wait();
-       * }
-       * if (parar == true) {
-       * break out;
-       * }
-       * }
-       * time = (tiempoImagenes[j + 1] * 1000) / 51;
-       * Thread.sleep((int) time);
-       * imagen1 = new ImageIcon(this.getClass().getResource(imagenes[j]));
-       * setIcon(imagen1);
-       * if (random == 1) {
-       * setBounds(i, 60 + n, 42, 42);
-       * n += 2;
-       * }
-       * if (random == 2) {
-       * setBounds(445, 45 + n, 42, 42);
-       * n += 2;
-       * }
-       * if (random == 3) {
-       * setBounds(posXopt3, 60 + n, 42, 42);
-       * n += 2;
-       * posXopt3 -= 1;
-       * }
-       * 
-       * if (j == ingredientes.length - 1 && i == 450) {
-       * if (!parar) {
-       * pedidosListos += 1;
-       * pedidosCompletados.setText(Integer.toString(pedidosListos));
-       * img1.setIcon(new ImageIcon(this.getClass().getResource(url[1])));
-       * }
-       * }
-       * } catch (Exception e) {
-       * }
-       * }
-       * restarIngredientes(j + 1);
-       * n = 0;
-       * posXopt3 = 495;
-       * if (pedidosListos == Integer.parseInt(txt1.getText().toString())) {
-       * // restarIngredientes();
-       * tm1.stopHilo();
-       * btn1.setEnabled(true);
-       * btn2.setEnabled(false);
-       * btn3.setEnabled(false);
-       * btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
-       * nombreIngrediente.setText("Taco completo. Fin del pedido");
-       * Resultados r = new Resultados(rcnt, cnt);
-       * } else {
-       * if (j < ingredientes.length - 1) {
-       * j++;
-       * } else if (j == ingredientes.length - 1) {
-       * try {
-       * nombreIngrediente.setText("Taco completo. Colocando tortilla");
-       * // restarIngredientes();
-       * 
-       * Thread.sleep((int) (tiempoImagenes[0] * 1000));
-       * img1.setIcon(new ImageIcon(this.getClass().getResource(url[0])));
-       * } catch (Exception e) {
-       * }
-       * 
-       * j = 0;
-       * }
-       * }
-       * 
-       * }
-       * 
-       * }
-       */
+      Resultados r = new Resultados(rcnt, cnt,text,pedidosListos,tiemposTotales);
    }
 
    synchronized void pausarHilo() {

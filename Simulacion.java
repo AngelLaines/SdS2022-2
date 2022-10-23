@@ -18,7 +18,7 @@ public class Simulacion extends JFrame {
         //
         // Etiquetas
         //
-        Etiquetas titulo = new Etiquetas("Simulador de Tacos de Carne Asada");
+        Etiquetas titulo = new Etiquetas("Simulador de Tacos \"Carnitas Cuatrolitro\"");
         Etiquetas et1 = new Etiquetas("Tortilla");
         Etiquetas et2 = new Etiquetas("Carne Asada");
         Etiquetas et3 = new Etiquetas("Repollo");
@@ -119,6 +119,7 @@ public class Simulacion extends JFrame {
         ingrediente.btn1 = btn1;
         ingrediente.btn2 = btn2;
         ingrediente.btn3 = btn4;
+        ingrediente.btn5=btn5;
         ingrediente.rcnt = rcnt;
         ingrediente.pedidosCompletados = et20;
         ingrediente.nombreIngrediente = nombreIngrediente;
@@ -128,13 +129,15 @@ public class Simulacion extends JFrame {
         ingrediente.ingredientes = ingredientes;
         ingrediente.imagenes = imagenes;
         btn1.txt1 = txt9;
+        btn1.btn5 = btn5;
         btn5.txt1 = txt9;
         btn1.cnt = cnt;
         btn2.cnt = cnt;
         btn4.cnt = cnt;
+        btn4.btn5 = btn5;
         btn5.cnt = cnt;
         btn5.etiqueta = et20;
-        btn5.tm1=tm1;
+        btn5.tm1 = tm1;
         btn1.rcnt = rcnt;
         btn2.rcnt = rcnt;
         btn1.tiempos = tiempos;
@@ -185,7 +188,7 @@ public class Simulacion extends JFrame {
         et7.setBounds(10, 170, 100, 25);
         et8.setBounds(10, 190, 100, 25);
         et9.setBounds(10, 30, 120, 25);
-        et10.setBounds(10, 320, 120, 25);
+        et10.setBounds(10, 270, 120, 25);
         et11.setBounds(185, 50, 100, 20);
         et12.setBounds(185, 70, 100, 20);
         et13.setBounds(185, 90, 100, 20);
@@ -194,13 +197,13 @@ public class Simulacion extends JFrame {
         et16.setBounds(185, 150, 100, 20);
         et17.setBounds(185, 170, 100, 20);
         et18.setBounds(185, 190, 100, 20);
-        et19.setBounds(10, 340, 120, 25);
-        et20.setBounds(120, 340, 50, 25);
+        et19.setBounds(10, 290, 120, 25);
+        et20.setBounds(120, 290, 50, 25);
         et21.setBounds(230, 30, 100, 20);
-        tm1.setBounds(140, 320, 100, 25);
-        titulo.setBounds(90, 10, 500, 18);
+        tm1.setBounds(140, 270, 100, 25);
+        titulo.setBounds(0, 10, 700, 25);
         tortilla.setBounds(400, 50, 256, 256);
-        nombreIngrediente.setBounds(370, 320, 200, 25);
+        nombreIngrediente.setBounds(370, 270, 200, 25);
         //
         // Posicion campos de texto
         //
@@ -235,6 +238,7 @@ public class Simulacion extends JFrame {
         //
         //
         titulo.setFont(fuente1);
+        titulo.setHorizontalAlignment(SwingConstants.CENTER);
         // Adicion a la ventana
         add(et1);
         add(et2);
@@ -282,7 +286,7 @@ public class Simulacion extends JFrame {
         // Configuracion ventana
         //
         setTitle("Simulador de Tacos de Carne Asada");
-        setSize(700, 430);
+        setSize(700, 370);
         setResizable(false);
         setLayout(null);
         setLocationRelativeTo(null);

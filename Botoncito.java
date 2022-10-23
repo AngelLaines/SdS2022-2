@@ -56,6 +56,7 @@ public class Botoncito extends JButton implements ActionListener {
         setEnabled(false);
         btn2.setEnabled(true);
         btn4.setEnabled(true);
+        btn5.setEnabled(false);
         t1.start();
         t2.start();
       }
@@ -73,15 +74,20 @@ public class Botoncito extends JButton implements ActionListener {
         for (int i = 0; i < tiempoIngrediente.length; i++) {
           tiempoIngrediente[i] = Double.parseDouble(tiempos[i].getText().toString());
         }
-        rcnt.setTimes(tiempoIngrediente);
-        evaluarCantidades();
-        setCantidades();
-        comprobar();
-        img1.tiempoImagenes = tiempoIngrediente;
-        img1.reanudarHilo();
-        tm1.reanudarHilo();
-        setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
-        cont = 0;
+        if (evaluarTxt()==false) {
+          JOptionPane.showMessageDialog(null, new JLabel("No puede ingresar un numero menor de ingredientes que\n el numero que estaba en el campo de texto",JLabel.CENTER), "Advertencia",
+            JOptionPane.WARNING_MESSAGE);
+        } else {
+          rcnt.setTimes(tiempoIngrediente);
+          evaluarCantidades();
+          setCantidades();
+          comprobar();
+          img1.tiempoImagenes = tiempoIngrediente;
+          img1.reanudarHilo();
+          tm1.reanudarHilo();
+          setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
+          cont = 0;
+        }
       }
 
     }
@@ -91,6 +97,7 @@ public class Botoncito extends JButton implements ActionListener {
       setEnabled(false);
       btn1.setEnabled(true);
       btn2.setEnabled(false);
+      btn5.setEnabled(true);
       btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
     }
     if (e.getSource() == btn5) {
@@ -151,6 +158,7 @@ public class Botoncito extends JButton implements ActionListener {
     System.out.println("Cantidad de pepino: " + cnt.getPepino());
     System.out.println("Cantidad de salsa: " + cnt.getSalsa());
     System.out.println("Cantidad de cebolla: " + cnt.getCebolla());
+    System.out.println("//////////////////////////////////////////////");
     System.out.println("Cantidad de rtortillas: " + rcnt.getRTortilla());
     System.out.println("Cantidad de rcarne: " + rcnt.getRCarne());
     System.out.println("Cantidad de rrepollo: " + rcnt.getRRepollo());
@@ -179,6 +187,21 @@ public class Botoncito extends JButton implements ActionListener {
     System.out.println("Cantidad de rpepino: " + rcnt.getRPepino());
     System.out.println("Cantidad de rsalsa: " + rcnt.getRSalsa());
     System.out.println("Cantidad de rcebolla: " + rcnt.getRCebolla());
+  }
+
+  public boolean evaluarTxt(){
+    if (cnt.getTortilla() > Integer.parseInt(cantidades[0].getText()) ||
+    cnt.getCarne() > Integer.parseInt(cantidades[1].getText()) ||
+    cnt.getRepollo() > Integer.parseInt(cantidades[2].getText()) ||
+    cnt.getVerdura() > Integer.parseInt(cantidades[3].getText()) ||
+    cnt.getLimon() > Integer.parseInt(cantidades[4].getText()) ||
+    cnt.getPepino() > Integer.parseInt(cantidades[5].getText()) ||
+    cnt.getSalsa() > Integer.parseInt(cantidades[6].getText()) ||
+    cnt.getCebolla() > Integer.parseInt(cantidades[7].getText())) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   private void evaluarCantidades() {

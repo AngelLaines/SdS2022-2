@@ -4,11 +4,18 @@ import java.awt.*;
 public class Resultados extends JDialog {
     Container cnt;
     RContainer rcnt;
+    private double tiempoTotal = 0.0;
+    private int pedidos = 0;
+    private String text;
     private int[] cantTacos = { 1, 100, 50, 20, 10, 100, 100, 30 };
-    private double[] times;
-    public Resultados(RContainer rcnt, Container cnt) {
-        this.rcnt=rcnt;
-        this.cnt=cnt;
+    private double[] times, tiemposTotales;
+
+    public Resultados(RContainer rcnt, Container cnt, String text, int pedidos, double[] tiemposTotales) {
+        this.rcnt = rcnt;
+        this.cnt = cnt;
+        this.text = text;
+        this.pedidos = pedidos;
+        this.tiemposTotales = tiemposTotales;
         initComponents();
     }
 
@@ -16,14 +23,16 @@ public class Resultados extends JDialog {
         times = rcnt.getTimes();
         Font fuente1 = new Font("Arial", 1, 24);
 
-        Etiquetas titulo = new Etiquetas("Resultados obtenidos");
+        Etiquetas titulo = new Etiquetas(text);
         titulo.setFont(fuente1);
-        Etiquetas tiempo = new Etiquetas("Tiempo transcurrido: "+rcnt.getTime());
+        titulo.setHorizontalAlignment(SwingConstants.CENTER);
+        Etiquetas tiempo = new Etiquetas("Tiempo transcurrido: " + rcnt.getTime());
         Etiquetas subtitulo1 = new Etiquetas("Material Utilizado");
         Etiquetas subtitulo2 = new Etiquetas("Material Sobrante");
         Etiquetas subtitulo3 = new Etiquetas("Material");
         Etiquetas subtitulo4 = new Etiquetas("Material/Taco");
         Etiquetas subtitulo5 = new Etiquetas("Tiempos/Taco (s)");
+        Etiquetas subtitulo6 = new Etiquetas("Tiempos totales");
 
         Etiquetas et1 = new Etiquetas("Tortilla");
         Etiquetas et2 = new Etiquetas("Carne Asada");
@@ -34,32 +43,32 @@ public class Resultados extends JDialog {
         Etiquetas et8 = new Etiquetas("Salsa");
         Etiquetas et9 = new Etiquetas("Cebolla Morada");
 
-        Etiquetas RTortilla = new Etiquetas(Integer.toString(rcnt.getRTortilla())+" pz.");
-        Etiquetas RCarne = new Etiquetas(Integer.toString(rcnt.getRCarne())+" g.");
-        Etiquetas RRepollo = new Etiquetas(Integer.toString(rcnt.getRRepollo())+" g.");
-        Etiquetas RVerdura = new Etiquetas(Integer.toString(rcnt.getRVerdura())+" g.");
-        Etiquetas RLimon = new Etiquetas(Integer.toString(rcnt.getRLimon())+" g.");
-        Etiquetas RPepino = new Etiquetas(Integer.toString(rcnt.getRPepino())+" g.");
+        Etiquetas RTortilla = new Etiquetas(Integer.toString(rcnt.getRTortilla()) + " pz.");
+        Etiquetas RCarne = new Etiquetas(Integer.toString(rcnt.getRCarne()) + " g.");
+        Etiquetas RRepollo = new Etiquetas(Integer.toString(rcnt.getRRepollo()) + " g.");
+        Etiquetas RVerdura = new Etiquetas(Integer.toString(rcnt.getRVerdura()) + " g.");
+        Etiquetas RLimon = new Etiquetas(Integer.toString(rcnt.getRLimon()) + " g.");
+        Etiquetas RPepino = new Etiquetas(Integer.toString(rcnt.getRPepino()) + " g.");
         Etiquetas RSalsa = new Etiquetas(Integer.toString(rcnt.getRSalsa()) + " ml.");
-        Etiquetas RCebolla = new Etiquetas(Integer.toString(rcnt.getRCebolla())+" g.");
+        Etiquetas RCebolla = new Etiquetas(Integer.toString(rcnt.getRCebolla()) + " g.");
 
-        Etiquetas CTortilla = new Etiquetas(Integer.toString(cnt.getTortilla())+" pz.");
-        Etiquetas CCarne = new Etiquetas(Integer.toString(cnt.getCarne())+" g.");
-        Etiquetas CRepollo = new Etiquetas(Integer.toString(cnt.getRepollo())+" g.");
-        Etiquetas CVerdura = new Etiquetas(Integer.toString(cnt.getVerdura())+" g.");
-        Etiquetas CLimon = new Etiquetas(Integer.toString(cnt.getLimon())+" g.");
-        Etiquetas CPepino = new Etiquetas(Integer.toString(cnt.getPepino())+" g.");
-        Etiquetas CSalsa = new Etiquetas(Integer.toString(cnt.getSalsa())+" ml.");
-        Etiquetas CCebolla = new Etiquetas(Integer.toString(cnt.getCebolla())+" g.");
+        Etiquetas CTortilla = new Etiquetas(Integer.toString(cnt.getTortilla()) + " pz.");
+        Etiquetas CCarne = new Etiquetas(Integer.toString(cnt.getCarne()) + " g.");
+        Etiquetas CRepollo = new Etiquetas(Integer.toString(cnt.getRepollo()) + " g.");
+        Etiquetas CVerdura = new Etiquetas(Integer.toString(cnt.getVerdura()) + " g.");
+        Etiquetas CLimon = new Etiquetas(Integer.toString(cnt.getLimon()) + " g.");
+        Etiquetas CPepino = new Etiquetas(Integer.toString(cnt.getPepino()) + " g.");
+        Etiquetas CSalsa = new Etiquetas(Integer.toString(cnt.getSalsa()) + " ml.");
+        Etiquetas CCebolla = new Etiquetas(Integer.toString(cnt.getCebolla()) + " g.");
 
-        Etiquetas CPTortilla = new Etiquetas(Integer.toString(cantTacos[0])+" pz.");
-        Etiquetas CPCarne = new Etiquetas(Integer.toString(cantTacos[1])+" g.");
-        Etiquetas CPRepollo = new Etiquetas(Integer.toString(cantTacos[2])+" g.");
-        Etiquetas CPVerdura = new Etiquetas(Integer.toString(cantTacos[3])+" g.");
-        Etiquetas CPLimon = new Etiquetas(Integer.toString(cantTacos[4])+" g.");
-        Etiquetas CPPepino = new Etiquetas(Integer.toString(cantTacos[5])+" g.");
-        Etiquetas CPSalsa = new Etiquetas(Integer.toString(cantTacos[6])+" ml.");
-        Etiquetas CPCebolla = new Etiquetas(Integer.toString(cantTacos[7])+" g.");
+        Etiquetas CPTortilla = new Etiquetas(Integer.toString(cantTacos[0]) + " pz.");
+        Etiquetas CPCarne = new Etiquetas(Integer.toString(cantTacos[1]) + " g.");
+        Etiquetas CPRepollo = new Etiquetas(Integer.toString(cantTacos[2]) + " g.");
+        Etiquetas CPVerdura = new Etiquetas(Integer.toString(cantTacos[3]) + " g.");
+        Etiquetas CPLimon = new Etiquetas(Integer.toString(cantTacos[4]) + " g.");
+        Etiquetas CPPepino = new Etiquetas(Integer.toString(cantTacos[5]) + " g.");
+        Etiquetas CPSalsa = new Etiquetas(Integer.toString(cantTacos[6]) + " ml.");
+        Etiquetas CPCebolla = new Etiquetas(Integer.toString(cantTacos[7]) + " g.");
 
         Etiquetas TPTortilla = new Etiquetas(Double.toString(times[0]));
         Etiquetas TPCarne = new Etiquetas(Double.toString(times[1]));
@@ -70,16 +79,38 @@ public class Resultados extends JDialog {
         Etiquetas TPSalsa = new Etiquetas(Double.toString(times[6]));
         Etiquetas TPCebolla = new Etiquetas(Double.toString(times[7]));
 
-        
-        Etiquetas cantidadPedido = new Etiquetas("Cantidad de tacos pedidos: "+rcnt.getPedidos());
+        Etiquetas TTTortilla = new Etiquetas(Double.toString(tiemposTotales[0]));
+        Etiquetas TTCarne = new Etiquetas(Double.toString(tiemposTotales[1]));
+        Etiquetas TTRepollo = new Etiquetas(Double.toString(tiemposTotales[2]));
+        Etiquetas TTVerdura = new Etiquetas(Double.toString(tiemposTotales[3]));
+        Etiquetas TTLimon = new Etiquetas(Double.toString(tiemposTotales[4]));
+        Etiquetas TTPepino = new Etiquetas(Double.toString(tiemposTotales[5]));
+        Etiquetas TTSalsa = new Etiquetas(Double.toString(tiemposTotales[6]));
+        Etiquetas TTCebolla = new Etiquetas(Double.toString(tiemposTotales[7]));
 
-        titulo.setBounds(150, 10, 500, 18);
+        Etiquetas TPTotal = new Etiquetas();
+        Etiquetas TTTotal = new Etiquetas();
+        for (int i = 0; i < times.length; i++) {
+            tiempoTotal += times[i];
+        }
+        Etiquetas tot = new Etiquetas("Total: ");
+        TPTotal.setText(Double.toString(tiempoTotal));
+        tiempoTotal = 0.0;
+        for (int i = 0; i < tiemposTotales.length; i++) {
+            tiempoTotal += tiemposTotales[i];
+        }
+        TTTotal.setText(Double.toString(tiempoTotal));
+        Etiquetas cantidadPedido = new Etiquetas("Cantidad de tacos pedidos: " + rcnt.getPedidos());
+        Etiquetas pedidosCompletos = new Etiquetas("Pedidos completados: " + Integer.toString(pedidos));
+
+        titulo.setBounds(1, 10, 750, 25);
         tiempo.setBounds(10, 300, 300, 25);
         subtitulo3.setBounds(10, 40, 50, 25);
         subtitulo1.setBounds(120, 40, 200, 25);
         subtitulo2.setBounds(235, 40, 200, 25);
-        subtitulo4.setBounds(350,40,200,25);
-        subtitulo5.setBounds(465,40,200,25);
+        subtitulo4.setBounds(350, 40, 200, 25);
+        subtitulo5.setBounds(465, 40, 200, 25);
+        subtitulo6.setBounds(580, 40, 200, 25);
 
         et1.setBounds(10, 80, 100, 25);
         et2.setBounds(10, 100, 100, 25);
@@ -116,7 +147,7 @@ public class Resultados extends JDialog {
         CPPepino.setBounds(350, 180, 200, 25);
         CPSalsa.setBounds(350, 200, 200, 25);
         CPCebolla.setBounds(350, 220, 200, 25);
-        
+
         TPTortilla.setBounds(465, 80, 200, 25);
         TPCarne.setBounds(465, 100, 200, 25);
         TPRepollo.setBounds(465, 120, 200, 25);
@@ -125,8 +156,21 @@ public class Resultados extends JDialog {
         TPPepino.setBounds(465, 180, 200, 25);
         TPSalsa.setBounds(465, 200, 200, 25);
         TPCebolla.setBounds(465, 220, 200, 25);
+        tot.setBounds(430, 240, 200, 25);
+        TPTotal.setBounds(465, 240, 200, 25);
+
+        TTTortilla.setBounds(580, 80, 200, 25);
+        TTCarne.setBounds(580, 100, 200, 25);
+        TTRepollo.setBounds(580, 120, 200, 25);
+        TTVerdura.setBounds(580, 140, 200, 25);
+        TTLimon.setBounds(580, 160, 200, 25);
+        TTPepino.setBounds(580, 180, 200, 25);
+        TTSalsa.setBounds(580, 200, 200, 25);
+        TTCebolla.setBounds(580, 220, 200, 25);
+        TTTotal.setBounds(580, 240, 200, 25);
 
         cantidadPedido.setBounds(10, 260, 400, 25);
+        pedidosCompletos.setBounds(10, 280, 400, 25);
 
         add(titulo);
         add(tiempo);
@@ -135,6 +179,7 @@ public class Resultados extends JDialog {
         add(subtitulo2);
         add(subtitulo4);
         add(subtitulo5);
+        add(subtitulo6);
 
         add(et1);
         add(et2);
@@ -180,11 +225,24 @@ public class Resultados extends JDialog {
         add(TPPepino);
         add(TPSalsa);
         add(TPCebolla);
+        add(TPTotal);
+        add(tot);
+
+        add(TTTortilla);
+        add(TTCarne);
+        add(TTRepollo);
+        add(TTVerdura);
+        add(TTLimon);
+        add(TTPepino);
+        add(TTSalsa);
+        add(TTCebolla);
+        add(TTTotal);
 
         add(cantidadPedido);
+        add(pedidosCompletos);
 
         setTitle("Resultados");
-        setSize(600, 400);
+        setSize(750, 400);
         setResizable(false);
         setLayout(null);
         setModal(true);
