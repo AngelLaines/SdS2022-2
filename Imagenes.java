@@ -35,6 +35,7 @@ public class Imagenes extends JLabel implements Runnable {
       double tiempoT=0.0;
       text="";
       tm1.rcnt = rcnt;
+      rcnt.setTime("00:00:00");
       img1.setIcon(new ImageIcon(this.getClass().getResource(url[0])));
       parar = false;
       int n = 0, random = 0, posXopt3 = 495, j = 0, pedidosListos = 0;

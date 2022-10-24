@@ -1,6 +1,6 @@
 public class RContainer {
     private int rTortilla=0,rCarne=0,rRepollo=0,rVerdura=0,rLimon=0,rPepino=0,rSalsa=0,rCebolla=0,pedidos=0;
-    private String time="";
+    private String time="00:00:00";
     private double times[];
     //
     // SETTERS

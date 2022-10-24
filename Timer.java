@@ -3,13 +3,13 @@ import javax.swing.*;
 public class Timer extends JLabel implements Runnable {
   boolean pausar, stop;
   RContainer rcnt;
-  private String cronometro = "";
+  private String cronometro = "00:00:00";
   public Timer(String name) {
     setText(name);
   }
 
   public void run() {
-
+    cronometro = "00:00:00";
     stop = false;
     int segundo = 1, minuto = 0, hora = 0;
     String segundos = "", minutos = "", horas = "";
