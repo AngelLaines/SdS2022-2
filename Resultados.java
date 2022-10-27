@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-
+import java.awt.event.*;
 public class Resultados extends JDialog {
     Container cnt;
     RContainer rcnt;
@@ -90,6 +90,9 @@ public class Resultados extends JDialog {
 
         Etiquetas TPTotal = new Etiquetas();
         Etiquetas TTTotal = new Etiquetas();
+
+        JButton btnAceptar = new JButton("Aceptar");
+
         for (int i = 0; i < times.length; i++) {
             tiempoTotal += times[i];
         }
@@ -172,6 +175,16 @@ public class Resultados extends JDialog {
         cantidadPedido.setBounds(10, 260, 400, 25);
         pedidosCompletos.setBounds(10, 280, 400, 25);
 
+        btnAceptar.setBounds(310,320,100,25);
+
+        ActionListener listener = new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                dispose();
+            }
+        };
+
+        btnAceptar.addActionListener(listener);
+
         add(titulo);
         add(tiempo);
         add(subtitulo3);
@@ -240,6 +253,8 @@ public class Resultados extends JDialog {
 
         add(cantidadPedido);
         add(pedidosCompletos);
+
+        add(btnAceptar);
 
         setTitle("Resultados");
         setSize(750, 400);

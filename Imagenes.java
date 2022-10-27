@@ -6,7 +6,7 @@ public class Imagenes extends JLabel implements Runnable {
    Botoncito btn1, btn2, btn3,btn5;
    Etiquetas nombreIngrediente, pedidosCompletados;
    Texto txt1, txt9;
-   Texto[] txtIngredientes;
+   Texto[] txtIngredientes, cantidades,tiempos;
    Timer tm1;
    private int[] cantTacos = { 1, 100, 50, 20, 10, 100, 100, 30 };
    Container cnt;
@@ -78,8 +78,7 @@ public class Imagenes extends JLabel implements Runnable {
                   nombreIngrediente.setText("Agregando " + ingredientes[b-1]);
                   nombreIngrediente.setHorizontalAlignment(SwingConstants.CENTER);
                   random = getRandom(1, 3);
-                  tiempoT=tiemposTotales[b] + tiempoImagenes[b];
-                  tiemposTotales[b] = tiempoT;
+                  
                   for (int i = 400; i <= 450; i++) { // Cambio de posicion de imagenes de los ingredientes
                      try {
                         synchronized (this) {
@@ -121,6 +120,9 @@ public class Imagenes extends JLabel implements Runnable {
                      }
    
                   }
+                  
+                  tiempoT=tiemposTotales[b] + tiempoImagenes[b];
+                  tiemposTotales[b] = tiempoT;
                   restarIngredientes(b);
                   n = 0;
                   posXopt3 = 495;
@@ -145,7 +147,9 @@ public class Imagenes extends JLabel implements Runnable {
       btn3.setEnabled(false);
       btn5.setEnabled(true);
       tm1.stopHilo();
+      bloqDesbl(true);
       Resultados r = new Resultados(rcnt, cnt,text,pedidosListos,tiemposTotales);
+      setDefaults();
    }
 
    synchronized void pausarHilo() {
@@ -201,6 +205,58 @@ public class Imagenes extends JLabel implements Runnable {
       }
 
    }
+
+   public void setDefaults() {
+      tiempos[0].setText("4.0");
+      tiempos[1].setText("2.0");
+      tiempos[2].setText("2.0");
+      tiempos[3].setText("6.0");
+      tiempos[4].setText("3.0");
+      tiempos[5].setText("5.0");
+      tiempos[6].setText("7.0");
+      tiempos[7].setText("3.0");
+  
+      cantidades[0].setText("1");
+      cantidades[1].setText("100");
+      cantidades[2].setText("50");
+      cantidades[3].setText("20");
+      cantidades[4].setText("10");
+      cantidades[5].setText("100");
+      cantidades[6].setText("100");
+      cantidades[7].setText("30");
+      
+      txt1.setText("0");
+      cnt.setTortilla(0);
+      cnt.setCarne(0);
+      cnt.setRepollo(0);
+      cnt.setVerdura(0);
+      cnt.setLimon(0);
+      cnt.setPepino(0);
+      cnt.setSalsa(0);
+      cnt.setCebolla(0);
+  
+      rcnt.setRTortilla(0);
+      rcnt.setRCarne(0);
+      rcnt.setRRepollo(0);
+      rcnt.setRVerdura(0);
+      rcnt.setRLimon(0);
+      rcnt.setRPepino(0);
+      rcnt.setRSalsa(0);
+      rcnt.setRCebolla(0);
+      tm1.setText("00:00:00");
+      pedidosCompletados.setText("0");
+    }
+    private void bloqDesbl(boolean a){
+    
+      for (int i = 0; i < cantidades.length; i++) {
+        cantidades[i].setEnabled(a);
+      }
+      txt1.setEnabled(a);
+      for (int i = 0; i < tiempos.length; i++) {
+        tiempos[i].setEnabled(a);
+      }
+    
+  }
 
    private static int getRandom(int min, int max) {
       int x = (int) (Math.random() * ((max - min) + 1)) + min;

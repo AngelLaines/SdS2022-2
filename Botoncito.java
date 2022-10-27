@@ -57,6 +57,7 @@ public class Botoncito extends JButton implements ActionListener {
         btn2.setEnabled(true);
         btn4.setEnabled(true);
         btn5.setEnabled(false);
+        bloqDesbl(false);
         t1.start();
         t2.start();
       }
@@ -69,7 +70,9 @@ public class Botoncito extends JButton implements ActionListener {
         tm1.pausarHilo();
         setIcon(new ImageIcon(this.getClass().getResource("images/play.png")));
         cont = 1;
+        bloqDesbl(true);
       } else {
+        bloqDesbl(false);
         tiempoIngrediente = new double[tiempos.length];
         for (int i = 0; i < tiempoIngrediente.length; i++) {
           tiempoIngrediente[i] = Double.parseDouble(tiempos[i].getText().toString());
@@ -98,6 +101,7 @@ public class Botoncito extends JButton implements ActionListener {
       btn1.setEnabled(true);
       btn2.setEnabled(false);
       btn5.setEnabled(true);
+      //bloqDesbl(true);
       btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
     }
     if (e.getSource() == btn5) {
@@ -134,8 +138,29 @@ public class Botoncito extends JButton implements ActionListener {
     cnt.setPepino(0);
     cnt.setSalsa(0);
     cnt.setCebolla(0);
+
+    rcnt.setRTortilla(0);
+    rcnt.setRCarne(0);
+    rcnt.setRRepollo(0);
+    rcnt.setRVerdura(0);
+    rcnt.setRLimon(0);
+    rcnt.setRPepino(0);
+    rcnt.setRSalsa(0);
+    rcnt.setRCebolla(0);
     tm1.setText("00:00:00");
     etiqueta.setText("0");
+  }
+
+  private void bloqDesbl(boolean a){
+    
+      for (int i = 0; i < cantidades.length; i++) {
+        cantidades[i].setEnabled(a);
+      }
+      txt1.setEnabled(a);
+      for (int i = 0; i < tiempos.length; i++) {
+        tiempos[i].setEnabled(a);
+      }
+    
   }
 
   private void setCantidades() {

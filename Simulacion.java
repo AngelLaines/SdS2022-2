@@ -128,9 +128,13 @@ public class Simulacion extends JFrame {
         ingrediente.url = url;
         ingrediente.ingredientes = ingredientes;
         ingrediente.imagenes = imagenes;
+        ingrediente.tiempos=tiempos;
+        ingrediente.cantidades=cantidades;
         btn1.txt1 = txt9;
         btn1.btn5 = btn5;
         btn5.txt1 = txt9;
+        btn4.txt1=txt9;
+        btn2.txt1=txt9;
         btn1.cnt = cnt;
         btn2.cnt = cnt;
         btn4.cnt = cnt;
@@ -140,6 +144,8 @@ public class Simulacion extends JFrame {
         btn5.tm1 = tm1;
         btn1.rcnt = rcnt;
         btn2.rcnt = rcnt;
+        btn4.rcnt=rcnt;
+        btn5.rcnt=rcnt;
         btn1.tiempos = tiempos;
         btn2.tiempos = tiempos;
         btn4.tiempos = tiempos;
@@ -176,6 +182,12 @@ public class Simulacion extends JFrame {
         btn5.btn2 = btn2;
         btn5.btn4 = btn4;
         btn5.btn5 = btn5;
+        btn1.tiempos=tiempos;
+        btn1.cantidades=cantidades;
+        btn2.tiempos=tiempos;
+        btn2.cantidades=cantidades;
+        btn4.tiempos=tiempos;
+        btn4.cantidades=cantidades;
         //
         // Posicion Etiquetas
         //
