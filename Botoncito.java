@@ -27,12 +27,12 @@ public class Botoncito extends JButton implements ActionListener {
   }
 
   public void actionPerformed(ActionEvent e) {
-    if (e.getSource() == btn1) {
-      tm1.setText("00:00:00");
-      pedidos.setText("0");
-      Thread t1 = new Thread(img1);
+    if (e.getSource() == btn1) { // boton start
+      tm1.setText("00:00:00");  
+      pedidos.setText("0");     
+      Thread t1 = new Thread(img1);  
       Thread t2 = new Thread(tm1);
-      if (txt1.getText().toString().equals("")) {
+      if (txt1.getText().toString().equals("")) { // Evalua si se ingreso cantidad de pedidos
         JOptionPane.showMessageDialog(null, "Ingrese un numero en pedidos", "Advertencia", JOptionPane.WARNING_MESSAGE);
       } else if (Integer.parseInt(txt1.getText().toString()) < 1) {
         JOptionPane.showMessageDialog(null, "Ingrese un numero mayor a 0 en pedidos", "Advertencia",
@@ -40,71 +40,95 @@ public class Botoncito extends JButton implements ActionListener {
       } else {
         img1.txt1 = txt1;
         tiempoIngrediente = new double[tiempos.length];
-        for (int i = 0; i < tiempoIngrediente.length; i++) {
+        for (int i = 0; i < tiempoIngrediente.length; i++) { // se rellena el arreglo de los tiempos mediante el arreglo de los txt
           tiempoIngrediente[i] = Double.parseDouble(tiempos[i].getText().toString());
         }
-
+        // se asignan las cantidades de los txt a una clase contenedora para actualizar las cantidades
         setCantidades();
-        comprobar();
+        // se asignan las cantidades de los txt a una clase contenedora para resultados sin alterar
         setRCantidades();
+        // se manda el arreglo de tiempos a la variable img1
         img1.tiempoImagenes = tiempoIngrediente;
+        // se manda la variable de la clase contenedora a img1
         img1.cnt = cnt;
+        // se manda el txt de los pedidos a img1
         img1.txt9 = txt1;
+        // se manda el arreglo de tiempos a la variable de la clase contenedora de resultados finales
         rcnt.setTimes(tiempoIngrediente);
+        // se manda la cantidad de pedidos a la variable de la clase contenedora
         rcnt.setPedidos(Integer.parseInt(txt1.getText()));
+        // se manda un arreglo de las cantidades de los txt a la variable img1
         img1.txtIngredientes = cantidades;
-        setEnabled(false);
+        // se bloquean todos los controles a excepcion de pausa/reanudar y stop
+        setEnabled(false); 
         btn2.setEnabled(true);
         btn4.setEnabled(true);
         btn5.setEnabled(false);
         bloqDesbl(false);
+        // se inician los hilos de las imagenes de los ingredientes(t1) y del cronometro(t2)
         t1.start();
         t2.start();
       }
 
     }
-    if (e.getSource() == btn2) {
-      // System.out.println("Hola");
-      if (cont == 0) {
+    if (e.getSource() == btn2) { // boton pausa - reanudar
+      if (cont == 0) { // se evalua el contador para saber si se pausa o se reanuda el hilo
+        // se pausan los hilos en ejecucion
         img1.pausarHilo();
         tm1.pausarHilo();
+        // se cambia la imagen del boton
         setIcon(new ImageIcon(this.getClass().getResource("images/play.png")));
+        // se cambia el valor del contador
         cont = 1;
+        // se habilitan los controles para poder modificar cantidades y tiempos
         bloqDesbl(true);
       } else {
+        // se bloquean los controles
         bloqDesbl(false);
+        // se modifican los tiempos
         tiempoIngrediente = new double[tiempos.length];
         for (int i = 0; i < tiempoIngrediente.length; i++) {
           tiempoIngrediente[i] = Double.parseDouble(tiempos[i].getText().toString());
         }
+        // se evalua si las cantidades es menor a la que ya estaba en el txt
         if (evaluarTxt()==false) {
           JOptionPane.showMessageDialog(null, new JLabel("No puede ingresar un numero menor de ingredientes que\n el numero que estaba en el campo de texto",JLabel.CENTER), "Advertencia",
             JOptionPane.WARNING_MESSAGE);
         } else {
+          // se actualizan los tiempos en la clase contenedora de resultados finales
           rcnt.setTimes(tiempoIngrediente);
+          // se evaluan las cantidades para actualizar la clase contenedora de resultados finales
           evaluarCantidades();
+          // se establecen las nuevas cantiades en la clase contenedora del hilo
           setCantidades();
-          comprobar();
+          // se mandan los tiempos a la variable img1 del hilo
           img1.tiempoImagenes = tiempoIngrediente;
+          // se reanuda el hilo de las imagenes y el cronometro
           img1.reanudarHilo();
           tm1.reanudarHilo();
+          // se cambia la imagen del boton de pausa/reanudar
           setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
+          // se cambia el valor del contador
           cont = 0;
         }
       }
 
     }
-    if (e.getSource() == btn4) {
+    if (e.getSource() == btn4) { // boton stop
+      // se manda a parar el hilo de las imagenes y del cronometro
       img1.stopHilo();
       tm1.stopHilo();
+      // se restablecen los controles por defecto
       setEnabled(false);
       btn1.setEnabled(true);
       btn2.setEnabled(false);
       btn5.setEnabled(true);
       //bloqDesbl(true);
+      // se cambia la imagen del boton pausa/reanudar por la que estaba por defecto
       btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
     }
-    if (e.getSource() == btn5) {
+    if (e.getSource() == btn5) { // boton reset
+      // se restablecen los txt, los contadores y las clases contenedpras por los valores que tenian por defecto
       setDefaults();
     }
 
@@ -204,14 +228,14 @@ public class Botoncito extends JButton implements ActionListener {
     rcnt.setRSalsa(Integer.parseInt(cantidades[6].getText()));
     rcnt.setRCebolla(Integer.parseInt(cantidades[7].getText()));
 
-    System.out.println("Cantidad de rtortillas: " + rcnt.getRTortilla());
-    System.out.println("Cantidad de rcarne: " + rcnt.getRCarne());
-    System.out.println("Cantidad de rrepollo: " + rcnt.getRRepollo());
-    System.out.println("Cantidad de rverdura: " + rcnt.getRVerdura());
-    System.out.println("Cantidad de rlimon: " + rcnt.getRLimon());
-    System.out.println("Cantidad de rpepino: " + rcnt.getRPepino());
-    System.out.println("Cantidad de rsalsa: " + rcnt.getRSalsa());
-    System.out.println("Cantidad de rcebolla: " + rcnt.getRCebolla());
+    //System.out.println("Cantidad de rtortillas: " + rcnt.getRTortilla());
+    //System.out.println("Cantidad de rcarne: " + rcnt.getRCarne());
+    //System.out.println("Cantidad de rrepollo: " + rcnt.getRRepollo());
+    //System.out.println("Cantidad de rverdura: " + rcnt.getRVerdura());
+    //System.out.println("Cantidad de rlimon: " + rcnt.getRLimon());
+    //System.out.println("Cantidad de rpepino: " + rcnt.getRPepino());
+    //System.out.println("Cantidad de rsalsa: " + rcnt.getRSalsa());
+    //System.out.println("Cantidad de rcebolla: " + rcnt.getRCebolla());
   }
 
   public boolean evaluarTxt(){
@@ -232,35 +256,35 @@ public class Botoncito extends JButton implements ActionListener {
   private void evaluarCantidades() {
     if (Integer.parseInt(cantidades[0].getText()) != cnt.getTortilla()) {
       rcnt.setRTortilla(rcnt.getRTortilla() - cnt.getTortilla() + Integer.parseInt(cantidades[0].getText()));
-      System.out.println(rcnt.getRTortilla());
+      //System.out.println(rcnt.getRTortilla());
     }
     if (Integer.parseInt(cantidades[1].getText()) != cnt.getCarne()) {
       rcnt.setRCarne(rcnt.getRCarne() - cnt.getCarne() + Integer.parseInt(cantidades[1].getText()));
-      System.out.println(rcnt.getRCarne());
+      //System.out.println(rcnt.getRCarne());
     }
     if (Integer.parseInt(cantidades[2].getText()) != cnt.getRepollo()) {
       rcnt.setRRepollo(rcnt.getRRepollo() - cnt.getRepollo() + Integer.parseInt(cantidades[2].getText()));
-      System.out.println(rcnt.getRRepollo());
+      //System.out.println(rcnt.getRRepollo());
     }
     if (Integer.parseInt(cantidades[3].getText()) != cnt.getVerdura()) {
       rcnt.setRVerdura(rcnt.getRVerdura() - cnt.getVerdura() + Integer.parseInt(cantidades[3].getText()));
-      System.out.println(rcnt.getRVerdura());
+      //System.out.println(rcnt.getRVerdura());
     }
     if (Integer.parseInt(cantidades[4].getText()) != cnt.getLimon()) {
       rcnt.setRLimon(rcnt.getRLimon() - cnt.getLimon() + Integer.parseInt(cantidades[4].getText()));
-      System.out.println(rcnt.getRLimon());
+      //System.out.println(rcnt.getRLimon());
     }
     if (Integer.parseInt(cantidades[5].getText()) != cnt.getPepino()) {
       rcnt.setRPepino(rcnt.getRPepino() - cnt.getPepino() + Integer.parseInt(cantidades[5].getText()));
-      System.out.println(rcnt.getRPepino());
+      //System.out.println(rcnt.getRPepino());
     }
     if (Integer.parseInt(cantidades[6].getText()) != cnt.getSalsa()) {
       rcnt.setRSalsa(rcnt.getRSalsa() - cnt.getSalsa() + Integer.parseInt(cantidades[6].getText()));
-      System.out.println(rcnt.getRSalsa());
+      //System.out.println(rcnt.getRSalsa());
     }
     if (Integer.parseInt(cantidades[7].getText()) != cnt.getCebolla()) {
       rcnt.setRCebolla(rcnt.getRCebolla() - cnt.getCebolla() + Integer.parseInt(cantidades[7].getText()));
-      System.out.println(rcnt.getRCebolla());
+      //System.out.println(rcnt.getRCebolla());
     }
   }
 }

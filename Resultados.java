@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.*;
+
 public class Resultados extends JDialog {
     Container cnt;
     RContainer rcnt;
@@ -22,6 +24,7 @@ public class Resultados extends JDialog {
     public void initComponents() {
         times = rcnt.getTimes();
         Font fuente1 = new Font("Arial", 1, 24);
+        DecimalFormat df = new DecimalFormat("###.##");
 
         Etiquetas titulo = new Etiquetas(text);
         titulo.setFont(fuente1);
@@ -79,14 +82,14 @@ public class Resultados extends JDialog {
         Etiquetas TPSalsa = new Etiquetas(Double.toString(times[6]));
         Etiquetas TPCebolla = new Etiquetas(Double.toString(times[7]));
 
-        Etiquetas TTTortilla = new Etiquetas(Double.toString(tiemposTotales[0]));
-        Etiquetas TTCarne = new Etiquetas(Double.toString(tiemposTotales[1]));
-        Etiquetas TTRepollo = new Etiquetas(Double.toString(tiemposTotales[2]));
-        Etiquetas TTVerdura = new Etiquetas(Double.toString(tiemposTotales[3]));
-        Etiquetas TTLimon = new Etiquetas(Double.toString(tiemposTotales[4]));
-        Etiquetas TTPepino = new Etiquetas(Double.toString(tiemposTotales[5]));
-        Etiquetas TTSalsa = new Etiquetas(Double.toString(tiemposTotales[6]));
-        Etiquetas TTCebolla = new Etiquetas(Double.toString(tiemposTotales[7]));
+        Etiquetas TTTortilla = new Etiquetas((df.format(tiemposTotales[0])));
+        Etiquetas TTCarne = new Etiquetas((df.format(tiemposTotales[1])));
+        Etiquetas TTRepollo = new Etiquetas((df.format(tiemposTotales[2])));
+        Etiquetas TTVerdura = new Etiquetas((df.format(tiemposTotales[3])));
+        Etiquetas TTLimon = new Etiquetas((df.format(tiemposTotales[4])));
+        Etiquetas TTPepino = new Etiquetas((df.format(tiemposTotales[5])));
+        Etiquetas TTSalsa = new Etiquetas((df.format(tiemposTotales[6])));
+        Etiquetas TTCebolla = new Etiquetas((df.format(tiemposTotales[7])));
 
         Etiquetas TPTotal = new Etiquetas();
         Etiquetas TTTotal = new Etiquetas();
@@ -97,12 +100,12 @@ public class Resultados extends JDialog {
             tiempoTotal += times[i];
         }
         Etiquetas tot = new Etiquetas("Total: ");
-        TPTotal.setText(Double.toString(tiempoTotal));
+        TPTotal.setText(df.format(tiempoTotal));
         tiempoTotal = 0.0;
         for (int i = 0; i < tiemposTotales.length; i++) {
             tiempoTotal += tiemposTotales[i];
         }
-        TTTotal.setText(Double.toString(tiempoTotal));
+        TTTotal.setText(df.format(tiempoTotal));
         Etiquetas cantidadPedido = new Etiquetas("Cantidad de tacos pedidos: " + rcnt.getPedidos());
         Etiquetas pedidosCompletos = new Etiquetas("Pedidos completados: " + Integer.toString(pedidos));
 

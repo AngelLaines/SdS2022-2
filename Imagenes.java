@@ -67,7 +67,11 @@ public class Imagenes extends JLabel implements Runnable {
                      restarIngredientes(b);
                      tiempoT=tiemposTotales[0] + tiempoImagenes[0];
                      tiemposTotales[0] = tiempoT;
-                     nombreIngrediente.setText("Colocando Tortilla");
+                     if(a>0){
+                        nombreIngrediente.setText("Taco completo. Colocando Tortilla");
+                     } else {
+                        nombreIngrediente.setText("Colocando Tortilla");
+                     }
                      
                   nombreIngrediente.setHorizontalAlignment(SwingConstants.CENTER);
                      Thread.sleep((int) (tiempoImagenes[0] * 1000));
@@ -139,6 +143,7 @@ public class Imagenes extends JLabel implements Runnable {
             }
          }
       }
+      tm1.stopHilo();
       if(text.equals("")){
          text = "Resultados obtenidos";
       }
@@ -146,10 +151,9 @@ public class Imagenes extends JLabel implements Runnable {
       btn2.setEnabled(false);
       btn3.setEnabled(false);
       btn5.setEnabled(true);
-      tm1.stopHilo();
       bloqDesbl(true);
-      Resultados r = new Resultados(rcnt, cnt,text,pedidosListos,tiemposTotales);
       setDefaults();
+      Resultados r = new Resultados(rcnt, cnt,text,pedidosListos,tiemposTotales);
    }
 
    synchronized void pausarHilo() {
