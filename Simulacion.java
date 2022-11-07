@@ -141,7 +141,6 @@ public class Simulacion extends JFrame {
         btn4.btn5 = btn5;
         btn5.cnt = cnt;
         btn5.etiqueta = et20;
-        btn5.tm1 = tm1;
         btn1.rcnt = rcnt;
         btn2.rcnt = rcnt;
         btn4.rcnt=rcnt;
@@ -152,7 +151,6 @@ public class Simulacion extends JFrame {
         btn5.tiempos = tiempos;
         btn1.cantidades = cantidades;
         btn2.cantidades = cantidades;
-        btn4.cantidades = cantidades;
         btn4.cantidades = cantidades;
         btn5.cantidades = cantidades;
         btn2.setEnabled(false);

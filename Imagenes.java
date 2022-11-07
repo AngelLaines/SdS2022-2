@@ -43,7 +43,7 @@ public class Imagenes extends JLabel implements Runnable {
       //
       // Recorre el arreglo de los ingredientes
       //
-      out: for (int a = 0; a < Integer.parseInt(txt1.getText().toString()); a++) {
+      out: for (int a = 0; a < Integer.parseInt(txt1.getText().toString()); a++) { // pedidos
          if (cnt.getTortilla() < cantTacos[0] || cnt.getCarne() < cantTacos[1] || cnt.getRepollo() < cantTacos[2]
                || cnt.getVerdura() < cantTacos[3] || cnt.getLimon() < cantTacos[4] || cnt.getPepino() < cantTacos[5]
                || cnt.getSalsa() < cantTacos[6] || cnt.getCebolla() < cantTacos[7] || tiempoImagenes[0] == 0.0 ||
@@ -57,8 +57,6 @@ public class Imagenes extends JLabel implements Runnable {
             btn2.setIcon(new ImageIcon(this.getClass().getResource("images/pause.png")));
             tm1.stopHilo();
             text = "Faltan ingredientes. Simulacion interrumpida.";
-
-            
             break out;
          } else {
             for (int b = 0; b < 8; b++) {
@@ -133,7 +131,7 @@ public class Imagenes extends JLabel implements Runnable {
                }
             }
             try {
-               nombreIngrediente.setText("Taco completo.");
+               // nombreIngrediente.setText("Taco completo.");
                // restarIngredientes();
                pedidosListos++;
                pedidosCompletados.setText(Integer.toString(pedidosListos));
@@ -172,7 +170,6 @@ public class Imagenes extends JLabel implements Runnable {
    }
 
    private void restarIngredientes(int j) {
-      
       switch (j) {
          case 0:
             cnt.setTortilla(cnt.getTortilla() - cantTacos[0]);
