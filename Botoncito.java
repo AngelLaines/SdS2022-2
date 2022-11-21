@@ -67,7 +67,7 @@ public class Botoncito extends JButton implements ActionListener {
         bloqDesbl(false);
         // se inician los hilos de las imagenes de los ingredientes(t1) y del cronometro(t2)
         t1.start();
-        t2.start();
+        t2.start(); // temp
       }
 
     }
@@ -82,7 +82,7 @@ public class Botoncito extends JButton implements ActionListener {
         cont = 1;
         // se habilitan los controles para poder modificar cantidades y tiempos
         bloqDesbl(true);
-      } else {
+      } else { /////////////////////////////////////////////
         // se bloquean los controles
         bloqDesbl(false);
         // se modifican los tiempos
@@ -228,14 +228,6 @@ public class Botoncito extends JButton implements ActionListener {
     rcnt.setRSalsa(Integer.parseInt(cantidades[6].getText()));
     rcnt.setRCebolla(Integer.parseInt(cantidades[7].getText()));
 
-    //System.out.println("Cantidad de rtortillas: " + rcnt.getRTortilla());
-    //System.out.println("Cantidad de rcarne: " + rcnt.getRCarne());
-    //System.out.println("Cantidad de rrepollo: " + rcnt.getRRepollo());
-    //System.out.println("Cantidad de rverdura: " + rcnt.getRVerdura());
-    //System.out.println("Cantidad de rlimon: " + rcnt.getRLimon());
-    //System.out.println("Cantidad de rpepino: " + rcnt.getRPepino());
-    //System.out.println("Cantidad de rsalsa: " + rcnt.getRSalsa());
-    //System.out.println("Cantidad de rcebolla: " + rcnt.getRCebolla());
   }
 
   public boolean evaluarTxt(){

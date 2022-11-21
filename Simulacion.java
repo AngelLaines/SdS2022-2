@@ -38,13 +38,13 @@ public class Simulacion extends JFrame {
         Etiquetas et17 = new Etiquetas("ml.");
         Etiquetas et18 = new Etiquetas("g.");
         Etiquetas et19 = new Etiquetas("Pedidos Hechos: ");
-        Etiquetas et20 = new Etiquetas("0");
+        Etiquetas et20 = new Etiquetas("0"); // pedidos listos
         Etiquetas et21 = new Etiquetas("Tiempos (segs.)");
-        Etiquetas nombreIngrediente = new Etiquetas();
+        Etiquetas nombreIngrediente = new Etiquetas(); // nombre ingrediente
         //
         // Temporizador
         //
-        Timer tm1 = new Timer("00:00:00");
+        Timer tm1 = new Timer("00:00:00"); // cronometro
         //
         // Arreglos
         //
@@ -101,6 +101,14 @@ public class Simulacion extends JFrame {
                 }
             }
         };
+        KeyAdapter ka2 = new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+                    e.consume(); // if it's not a number, ignore the event
+                }
+            }
+        };
         txt1.addKeyListener(ka);
         txt2.addKeyListener(ka);
         txt3.addKeyListener(ka);
@@ -109,7 +117,7 @@ public class Simulacion extends JFrame {
         txt6.addKeyListener(ka);
         txt7.addKeyListener(ka);
         txt8.addKeyListener(ka);
-        txt9.addKeyListener(ka);
+        txt9.addKeyListener(ka2);
         for (int i = 0; i < tiempos.length; i++) {
             tiempos[i].addKeyListener(ka);
         }
@@ -120,50 +128,71 @@ public class Simulacion extends JFrame {
         ingrediente.btn2 = btn2;
         ingrediente.btn3 = btn4;
         ingrediente.btn5=btn5;
+
         ingrediente.rcnt = rcnt;
+
         ingrediente.pedidosCompletados = et20;
+
         ingrediente.nombreIngrediente = nombreIngrediente;
+
         ingrediente.tm1 = tm1;
+
         ingrediente.img1 = tortilla;
         ingrediente.url = url;
+
         ingrediente.ingredientes = ingredientes;
+
         ingrediente.imagenes = imagenes;
         ingrediente.tiempos=tiempos;
         ingrediente.cantidades=cantidades;
-        btn1.txt1 = txt9;
+
         btn1.btn5 = btn5;
+
+        btn1.txt1 = txt9;
         btn5.txt1 = txt9;
         btn4.txt1=txt9;
         btn2.txt1=txt9;
         btn1.cnt = cnt;
         btn2.cnt = cnt;
         btn4.cnt = cnt;
-        btn4.btn5 = btn5;
         btn5.cnt = cnt;
+
+        btn4.btn5 = btn5;
         btn5.etiqueta = et20;
+        
         btn1.rcnt = rcnt;
         btn2.rcnt = rcnt;
         btn4.rcnt=rcnt;
         btn5.rcnt=rcnt;
+
         btn1.tiempos = tiempos;
         btn2.tiempos = tiempos;
         btn4.tiempos = tiempos;
         btn5.tiempos = tiempos;
+
         btn1.cantidades = cantidades;
         btn2.cantidades = cantidades;
         btn4.cantidades = cantidades;
         btn5.cantidades = cantidades;
+
         btn2.setEnabled(false);
         btn4.setEnabled(false);
+
         btn1.img1 = ingrediente;
         btn2.img1 = ingrediente;
         btn4.img1 = ingrediente;
         btn5.img1 = ingrediente;
+
         btn1.pedidos = et20;
+
+        ///
         btn1.tm1 = tm1;
         btn2.tm1 = tm1;
         btn4.tm1 = tm1;
         btn5.tm1 = tm1;
+        ///
+
+        ///
         btn1.btn1 = btn1;
         btn1.btn2 = btn2;
         btn1.btn4 = btn4;
@@ -180,6 +209,8 @@ public class Simulacion extends JFrame {
         btn5.btn2 = btn2;
         btn5.btn4 = btn4;
         btn5.btn5 = btn5;
+        ///
+
         btn1.tiempos=tiempos;
         btn1.cantidades=cantidades;
         btn2.tiempos=tiempos;
