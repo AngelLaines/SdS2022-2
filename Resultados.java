@@ -45,7 +45,9 @@ public class Resultados extends JDialog {
         Etiquetas et7 = new Etiquetas("Pepino");
         Etiquetas et8 = new Etiquetas("Salsa");
         Etiquetas et9 = new Etiquetas("Cebolla Morada");
-
+        //
+        // Cantidades sin modificar
+        //
         Etiquetas RTortilla = new Etiquetas(Integer.toString(rcnt.getRTortilla()) + " pz.");
         Etiquetas RCarne = new Etiquetas(Integer.toString(rcnt.getRCarne()) + " g.");
         Etiquetas RRepollo = new Etiquetas(Integer.toString(rcnt.getRRepollo()) + " g.");
@@ -54,7 +56,9 @@ public class Resultados extends JDialog {
         Etiquetas RPepino = new Etiquetas(Integer.toString(rcnt.getRPepino()) + " g.");
         Etiquetas RSalsa = new Etiquetas(Integer.toString(rcnt.getRSalsa()) + " ml.");
         Etiquetas RCebolla = new Etiquetas(Integer.toString(rcnt.getRCebolla()) + " g.");
-
+        //
+        // Cantidades modificadas
+        //
         Etiquetas CTortilla = new Etiquetas(Integer.toString(cnt.getTortilla()) + " pz.");
         Etiquetas CCarne = new Etiquetas(Integer.toString(cnt.getCarne()) + " g.");
         Etiquetas CRepollo = new Etiquetas(Integer.toString(cnt.getRepollo()) + " g.");
@@ -63,7 +67,9 @@ public class Resultados extends JDialog {
         Etiquetas CPepino = new Etiquetas(Integer.toString(cnt.getPepino()) + " g.");
         Etiquetas CSalsa = new Etiquetas(Integer.toString(cnt.getSalsa()) + " ml.");
         Etiquetas CCebolla = new Etiquetas(Integer.toString(cnt.getCebolla()) + " g.");
-
+        //
+        // Cantidades por taco
+        //
         Etiquetas CPTortilla = new Etiquetas(Integer.toString(cantTacos[0]) + " pz.");
         Etiquetas CPCarne = new Etiquetas(Integer.toString(cantTacos[1]) + " g.");
         Etiquetas CPRepollo = new Etiquetas(Integer.toString(cantTacos[2]) + " g.");
@@ -72,7 +78,9 @@ public class Resultados extends JDialog {
         Etiquetas CPPepino = new Etiquetas(Integer.toString(cantTacos[5]) + " g.");
         Etiquetas CPSalsa = new Etiquetas(Integer.toString(cantTacos[6]) + " ml.");
         Etiquetas CPCebolla = new Etiquetas(Integer.toString(cantTacos[7]) + " g.");
-
+        //
+        // Tiempos por taco
+        //
         Etiquetas TPTortilla = new Etiquetas(Double.toString(times[0]));
         Etiquetas TPCarne = new Etiquetas(Double.toString(times[1]));
         Etiquetas TPRepollo = new Etiquetas(Double.toString(times[2]));
@@ -81,7 +89,9 @@ public class Resultados extends JDialog {
         Etiquetas TPPepino = new Etiquetas(Double.toString(times[5]));
         Etiquetas TPSalsa = new Etiquetas(Double.toString(times[6]));
         Etiquetas TPCebolla = new Etiquetas(Double.toString(times[7]));
-
+        //
+        // Tiempos totales
+        //
         Etiquetas TTTortilla = new Etiquetas((df.format(tiemposTotales[0])));
         Etiquetas TTCarne = new Etiquetas((df.format(tiemposTotales[1])));
         Etiquetas TTRepollo = new Etiquetas((df.format(tiemposTotales[2])));
@@ -91,8 +101,9 @@ public class Resultados extends JDialog {
         Etiquetas TTSalsa = new Etiquetas((df.format(tiemposTotales[6])));
         Etiquetas TTCebolla = new Etiquetas((df.format(tiemposTotales[7])));
 
-        Etiquetas TPTotal = new Etiquetas();
-        Etiquetas TTTotal = new Etiquetas();
+        Etiquetas TPTotal = new Etiquetas(); // tiempo total por taco
+
+        Etiquetas TTTotal = new Etiquetas(); // tiempo total por todos los tacos
 
         JButton btnAceptar = new JButton("Aceptar");
 
@@ -106,7 +117,9 @@ public class Resultados extends JDialog {
             tiempoTotal += tiemposTotales[i];
         }
         TTTotal.setText(df.format(tiempoTotal));
+
         Etiquetas cantidadPedido = new Etiquetas("Cantidad de tacos pedidos: " + rcnt.getPedidos());
+        
         Etiquetas pedidosCompletos = new Etiquetas("Pedidos completados: " + Integer.toString(pedidos));
 
         titulo.setBounds(1, 10, 750, 25);
