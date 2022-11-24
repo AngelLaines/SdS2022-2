@@ -7,6 +7,20 @@ public class Simulacion extends JFrame {
     Container cnt;
     RContainer rcnt;
 
+    /***
+     * Container: Se guardan los datos ingresados por el usuario de la cantidad de
+     * ingredientes y tiempo.
+     * Estos datos se modifican en el hilo de los ingredientes. (variable
+     * ingredientes)
+     * 
+     * RContainer: Se guardan los datos ingresados por el usuario de la cantidad de
+     * ingredientes y tiempo.
+     * Estos datos solo se modifican si el usuario hace un cambio de las cantidades
+     * de ingredientes
+     * y tiempos cuando el hilo esta pausado. Se guarda el tiempo del cronometro
+     * cada segundo.
+     */
+
     public Simulacion() {
         cnt = new Container();
         rcnt = new RContainer();
@@ -93,7 +107,7 @@ public class Simulacion extends JFrame {
         //
         // KeyAdapter
         //
-        KeyAdapter ka = new KeyAdapter() {
+        KeyAdapter ka = new KeyAdapter() { // permite ingresar decimales
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE) && (c > '.')) {
@@ -101,7 +115,7 @@ public class Simulacion extends JFrame {
                 }
             }
         };
-        KeyAdapter ka2 = new KeyAdapter() {
+        KeyAdapter ka2 = new KeyAdapter() { // solo numeros enteros
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
@@ -109,6 +123,9 @@ public class Simulacion extends JFrame {
                 }
             }
         };
+        /***
+         * se agregan los keylisteners a los campos de texto
+         */
         txt1.addKeyListener(ka);
         txt2.addKeyListener(ka);
         txt3.addKeyListener(ka);
@@ -127,7 +144,7 @@ public class Simulacion extends JFrame {
         ingrediente.btn1 = btn1;
         ingrediente.btn2 = btn2;
         ingrediente.btn3 = btn4;
-        ingrediente.btn5=btn5;
+        ingrediente.btn5 = btn5;
 
         ingrediente.rcnt = rcnt;
 
@@ -143,15 +160,15 @@ public class Simulacion extends JFrame {
         ingrediente.ingredientes = ingredientes;
 
         ingrediente.imagenes = imagenes;
-        ingrediente.tiempos=tiempos;
-        ingrediente.cantidades=cantidades;
+        ingrediente.tiempos = tiempos;
+        ingrediente.cantidades = cantidades;
 
         btn1.btn5 = btn5;
 
         btn1.txt1 = txt9;
         btn5.txt1 = txt9;
-        btn4.txt1=txt9;
-        btn2.txt1=txt9;
+        btn4.txt1 = txt9;
+        btn2.txt1 = txt9;
         btn1.cnt = cnt;
         btn2.cnt = cnt;
         btn4.cnt = cnt;
@@ -159,11 +176,11 @@ public class Simulacion extends JFrame {
 
         btn4.btn5 = btn5;
         btn5.etiqueta = et20;
-        
+
         btn1.rcnt = rcnt;
         btn2.rcnt = rcnt;
-        btn4.rcnt=rcnt;
-        btn5.rcnt=rcnt;
+        btn4.rcnt = rcnt;
+        btn5.rcnt = rcnt;
 
         btn1.tiempos = tiempos;
         btn2.tiempos = tiempos;
@@ -211,12 +228,12 @@ public class Simulacion extends JFrame {
         btn5.btn5 = btn5;
         ///
 
-        btn1.tiempos=tiempos;
-        btn1.cantidades=cantidades;
-        btn2.tiempos=tiempos;
-        btn2.cantidades=cantidades;
-        btn4.tiempos=tiempos;
-        btn4.cantidades=cantidades;
+        btn1.tiempos = tiempos;
+        btn1.cantidades = cantidades;
+        btn2.tiempos = tiempos;
+        btn2.cantidades = cantidades;
+        btn4.tiempos = tiempos;
+        btn4.cantidades = cantidades;
         //
         // Posicion Etiquetas
         //

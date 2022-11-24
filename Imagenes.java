@@ -59,27 +59,31 @@ public class Imagenes extends JLabel implements Runnable {
             text = "Faltan ingredientes. Simulacion interrumpida.";
             break out;
          } else {
-            for (int b = 0; b < 8; b++) {
+            for (int b = 0; b < 8; b++) { // for que se basa en el arreglo de los tiempos. recorre los ingredientes
                if (b == 0) {
                   try {
                      restarIngredientes(b);
-                     tiempoT=tiemposTotales[0] + tiempoImagenes[0];
+                     /**
+                      * tiemposTotales: tiempos de los ingredientes que se suman en cada vuelta del segundo bucle
+                      * tiempoImagenes: tiempos establecidos por el usuario para cada ingrediente
+                      */
+                     tiempoT=tiemposTotales[0] + tiempoImagenes[0]; // length 0-7
                      tiemposTotales[0] = tiempoT;
-                     if(a>0){
+                     if(a>0){ // a del for principal, indica los pedidos realizados al momento
                         nombreIngrediente.setText("Taco completo. Colocando Tortilla");
                      } else {
                         nombreIngrediente.setText("Colocando Tortilla");
                      }
                      
-                  nombreIngrediente.setHorizontalAlignment(SwingConstants.CENTER);
+                  nombreIngrediente.setHorizontalAlignment(SwingConstants.CENTER); // centra el texto del label
                      Thread.sleep((int) (tiempoImagenes[0] * 1000));
                      img1.setIcon(new ImageIcon(this.getClass().getResource(url[0])));
                   } catch (Exception e) {
                   }
                } else {
-                  nombreIngrediente.setText("Agregando " + ingredientes[b-1]);
+                  nombreIngrediente.setText("Agregando " + ingredientes[b-1]); // length 0 - 6
                   nombreIngrediente.setHorizontalAlignment(SwingConstants.CENTER);
-                  random = getRandom(1, 3);
+                  random = getRandom(1, 3); // posisiciones de los ingredientes
                   
                   for (int i = 400; i <= 450; i++) { // Cambio de posicion de imagenes de los ingredientes
                      try {
@@ -88,27 +92,37 @@ public class Imagenes extends JLabel implements Runnable {
                               wait();
                            }
                            if (parar == true) {
-                              text = "Simulacion interrumpida. Resultados obtenidos";
+                              text = "Simulacion interrumpida. Resultados obtenidos"; // titulo de la ventana de resultados
                               break out;
                            }
                         }
-                        
+                        // 51 son las veces que el bucle se repetira. se divide el tiempo en milisegundos entre 51
+                        // para que al terminar el bucle el tiempo sea igual al del arreglo de tiempos multiplicado
+                        // por mil
                         time = (tiempoImagenes[b] * 1000) / 51;
                         Thread.sleep((int) time);
                         imagen1 = new ImageIcon(this.getClass().getResource(imagenes[b-1]));
                         setIcon(imagen1);
-                        if (random == 1) {
-                           setBounds(i, 60 + n, 42, 42);
+                        if (random == 1) { // son las posiciones de los ingredientes
+                           setBounds(i, 60 + n, 42, 42); // izq a der
                            n += 2;
+                           /**
+                            * i: cambio de movimiento en x
+                            * n: cambio de movimiento en y
+                            */
                         }
-                        if (random == 2) {
+                        if (random == 2) { // movimiento verticals
                            setBounds(445, 45 + n, 42, 42);
                            n += 2;
                         }
-                        if (random == 3) {
+                        if (random == 3) { // der - izq
                            setBounds(posXopt3, 60 + n, 42, 42);
                            n += 2;
                            posXopt3 -= 1;
+                           /**
+                            * posXopt3: cambio de movimiento en x donde se reduce en 1 en cada ciclo
+                            * exclusivo para la opcion 3 de derecha a izquierda
+                            */
                         }
    
                         /* if (a == ingredientes.length - 1 && i == 450) {
@@ -122,10 +136,16 @@ public class Imagenes extends JLabel implements Runnable {
                      }
    
                   }
-                  
+                  /**
+                   * tiemposTotales: tiempos de los ingredientes que se suman en cada vuelta del segundo bucle
+                   * tiempoImagenes: tiempos establecidos por el usuario para cada ingrediente
+                   */
                   tiempoT=tiemposTotales[b] + tiempoImagenes[b];
                   tiemposTotales[b] = tiempoT;
                   restarIngredientes(b);
+                  /***
+                   * Se ponen por defecto para que no se altere el movimento de los ingredientes
+                   */
                   n = 0;
                   posXopt3 = 495;
                }
@@ -145,13 +165,23 @@ public class Imagenes extends JLabel implements Runnable {
       if(text.equals("")){
          text = "Resultados obtenidos";
       }
+      /***
+       * se pone por defecto los textfields y sus valores, los botones y se debloquea todo y se bloquea el boton
+       * de pausa-reanudar y de stop
+       * y se manda a llamar a la ventana de resultados
+       * 
+       * rcnt: RContainer
+       * cnt: Container
+       * pedidosListos: cantidad de pedidos que se pudieron realizar
+       * tiemposTotales: tiempos de los ingredientes que se suman en cada vuelta del segundo bucle del hilo
+       */
       btn1.setEnabled(true);
       btn2.setEnabled(false);
       btn3.setEnabled(false);
       btn5.setEnabled(true);
       bloqDesbl(true);
-      setDefaults();
       Resultados r = new Resultados(rcnt, cnt,text,pedidosListos,tiemposTotales);
+      setDefaults();
    }
 
    synchronized void pausarHilo() {
@@ -170,6 +200,15 @@ public class Imagenes extends JLabel implements Runnable {
    }
 
    private void restarIngredientes(int j) {
+      /***
+       * Metodo que recibe un indice del bucle de ingredientes y utiliza un switch para determinar que ingrediente
+       * se va a restar en los campos de texto (TextField) con las cantidades por defecto de los ingredientes
+       * y la resta se almacena en el contenedor que se esta editando en el hilo
+       * 
+       * cantTacos: arreglo de las cantidades por defecto de los tacos
+       * cnt: contenedor que se modifica en el hilo
+       * txtIngredientes: arreglo de los TextFields de los ingredientes
+       */
       switch (j) {
          case 0:
             cnt.setTortilla(cnt.getTortilla() - cantTacos[0]);
@@ -208,6 +247,10 @@ public class Imagenes extends JLabel implements Runnable {
    }
 
    public void setDefaults() {
+      /***
+       * pone por defecto todos los valores de los TextFields, etiquetas de pedidos y de tiempo
+       * y los contenedores
+       */
       tiempos[0].setText("4.0");
       tiempos[1].setText("2.0");
       tiempos[2].setText("2.0");
@@ -248,7 +291,12 @@ public class Imagenes extends JLabel implements Runnable {
       pedidosCompletados.setText("0");
     }
     private void bloqDesbl(boolean a){
-    
+      /***
+       * Bloquea los textfields cuando el hilo inicia y se reanuda
+       * Desbloquea los textfields cuando el hilo se pausa y se para se acaba
+       * 
+       * a: valor booleano que recibe al ser llamado
+       */
       for (int i = 0; i < cantidades.length; i++) {
         cantidades[i].setEnabled(a);
       }

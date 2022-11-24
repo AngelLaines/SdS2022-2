@@ -19,26 +19,34 @@ public class Botoncito extends JButton implements ActionListener {
   public Botoncito(String url, String name) {
     ImageIcon img = new ImageIcon(this.getClass().getResource(url));
     setIcon(img);
-    setName(name);
+    //setName(name);
+    /***
+     * hacen que el boton no tenga borde ni fondo
+     */
     setFocusPainted(false);
     setBorderPainted(false);
     setContentAreaFilled(false);
-    setCursor(new Cursor(Cursor.HAND_CURSOR));
+    setCursor(new Cursor(Cursor.HAND_CURSOR)); // cursor de la manita al posicionarlo en el boton habilitado
   }
 
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == btn1) { // boton start
       tm1.setText("00:00:00");  
-      pedidos.setText("0");     
-      Thread t1 = new Thread(img1);  
+      pedidos.setText("0");
+      /***
+       * se crean los hilos del cronometro y de los ingredientes
+       */    
+      Thread t1 = new Thread(img1);  // ingredientes
       Thread t2 = new Thread(tm1);
       if (txt1.getText().toString().equals("")) { // Evalua si se ingreso cantidad de pedidos
         JOptionPane.showMessageDialog(null, "Ingrese un numero en pedidos", "Advertencia", JOptionPane.WARNING_MESSAGE);
-      } else if (Integer.parseInt(txt1.getText().toString()) < 1) {
+      } else if (Integer.parseInt(txt1.getText().toString()) < 1) { // evalua si la cantidad de depdidos es menor a 0
         JOptionPane.showMessageDialog(null, "Ingrese un numero mayor a 0 en pedidos", "Advertencia",
             JOptionPane.WARNING_MESSAGE);
       } else {
-        img1.txt1 = txt1;
+        
+        // txt1: Pedidos
+        // se instancia el arreglo de los tiempos de los ingredientes
         tiempoIngrediente = new double[tiempos.length];
         for (int i = 0; i < tiempoIngrediente.length; i++) { // se rellena el arreglo de los tiempos mediante el arreglo de los txt
           tiempoIngrediente[i] = Double.parseDouble(tiempos[i].getText().toString());
@@ -52,7 +60,7 @@ public class Botoncito extends JButton implements ActionListener {
         // se manda la variable de la clase contenedora a img1
         img1.cnt = cnt;
         // se manda el txt de los pedidos a img1
-        img1.txt9 = txt1;
+        img1.txt1 = txt1;
         // se manda el arreglo de tiempos a la variable de la clase contenedora de resultados finales
         rcnt.setTimes(tiempoIngrediente);
         // se manda la cantidad de pedidos a la variable de la clase contenedora
@@ -82,19 +90,19 @@ public class Botoncito extends JButton implements ActionListener {
         cont = 1;
         // se habilitan los controles para poder modificar cantidades y tiempos
         bloqDesbl(true);
-      } else { /////////////////////////////////////////////
-        // se bloquean los controles
-        bloqDesbl(false);
-        // se modifican los tiempos
-        tiempoIngrediente = new double[tiempos.length];
-        for (int i = 0; i < tiempoIngrediente.length; i++) {
-          tiempoIngrediente[i] = Double.parseDouble(tiempos[i].getText().toString());
-        }
+      } else { ///////////////////////////////////////////// se reanuda el hilo
         // se evalua si las cantidades es menor a la que ya estaba en el txt
         if (evaluarTxt()==false) {
           JOptionPane.showMessageDialog(null, new JLabel("No puede ingresar un numero menor de ingredientes que\n el numero que estaba en el campo de texto",JLabel.CENTER), "Advertencia",
-            JOptionPane.WARNING_MESSAGE);
+          JOptionPane.WARNING_MESSAGE);
         } else {
+          // se bloquean los controles
+          bloqDesbl(false);
+          // se modifican los tiempos
+          tiempoIngrediente = new double[tiempos.length];
+          for (int i = 0; i < tiempoIngrediente.length; i++) {
+            tiempoIngrediente[i] = Double.parseDouble(tiempos[i].getText().toString());
+          }
           // se actualizan los tiempos en la clase contenedora de resultados finales
           rcnt.setTimes(tiempoIngrediente);
           // se evaluan las cantidades para actualizar la clase contenedora de resultados finales
@@ -176,7 +184,12 @@ public class Botoncito extends JButton implements ActionListener {
   }
 
   private void bloqDesbl(boolean a){
-    
+      /***
+       * Bloquea los textfields cuando el hilo inicia y se reanuda (false)
+       * Desbloquea los textfields cuando el hilo se pausa y se para se acaba (true)
+       * 
+       * a: valor booleano que recibe al ser llamado
+       */
       for (int i = 0; i < cantidades.length; i++) {
         cantidades[i].setEnabled(a);
       }
@@ -246,6 +259,11 @@ public class Botoncito extends JButton implements ActionListener {
   }
 
   private void evaluarCantidades() {
+    /***
+     * primero se evalua que lo que lo que se ingreso de nuevo en el textfield sea diferente al valor del
+     * contenedor actual que se modifica en el hilo de los ingredientes para hacer los 
+     * cambios en el rcontainer
+     */
     if (Integer.parseInt(cantidades[0].getText()) != cnt.getTortilla()) {
       rcnt.setRTortilla(rcnt.getRTortilla() - cnt.getTortilla() + Integer.parseInt(cantidades[0].getText()));
       //System.out.println(rcnt.getRTortilla());
